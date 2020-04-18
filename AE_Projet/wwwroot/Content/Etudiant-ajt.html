@@ -1,0 +1,102 @@
+﻿
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>EMSI</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+	<link href="img/pic.png" rel="shortcut icon"/>
+	<link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,500,500i,600,600i,700,700i,800,800i" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="css/owl.carousel.css"/>
+	<link rel="stylesheet" href="css/style.css"/>
+    <style>
+        body{
+            background-color: #f2f2f2;
+        }
+        .formulaire{
+            margin-top: -100px;
+            width:40%;
+            margin-left: 30%;
+        }
+        select{
+            margin-bottom: 20px;
+            width:100%;
+        }
+    </style>
+</head>
+<body>
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+	<header class="header-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 col-md-3">
+					<div class="site-logo">
+						<img src="img/logo.png" alt="">
+					</div>
+					
+				</div>
+				<div class="col-lg-9 col-md-9">
+                    <nav class="main-menu">
+						<ul>
+							<li><a href="Acceuil-admin.html">Accueil</a></li>
+                            <li><a href="Profil-admin.html"><i class="fas fa-user-circle"></i> Nom Prenom </a></li>
+                            <a href="dex.html" class="dex-btn ">Se déconnecter</a>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</header>
+    
+	<section class="categories-section spad">
+		<div class="container">
+			<div class="section-title">
+				<h2 >Ajouter Etudiant</h2>
+            </div>
+            <div asp-action="AjouterEtd">
+                <div class="form-group">
+                    <label asp-for="Matricule" class="control-label">Matricule</label>
+                <input asp-for="Matricule" class="form-control" />
+                <span asp-validation-for="Matricule" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                     <label asp-for="Nom_Etd" class="control-label">Nom</label>
+                <input asp-for="Nom_Etd" class="form-control" />
+                <span asp-validation-for="Nom_Etd" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Prenom_Etd" class="control-label">Prenom</label>
+                <input asp-for="Prenom_Etd" class="form-control" />
+                <span asp-validation-for="Prenom_Etd" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CIN_Etd" class="control-label">CIN</label>
+                <input asp-for="CIN_Etd" class="form-control" />
+                <span asp-validation-for="CIN_Etd" class="text-danger"></span>
+                </div>
+                 <div class="form-group">
+                    <label asp-for="filiere.Nom_Filiere" class="control-label">Filiere</label>
+                <select asp-for="filiere.Nom_Filiere" class ="form-control" asp-items="ViewBag.Nom_Filiere"></select>
+                </div>
+                <div>
+                    <a asp-action="IndexEtd">Annuler</a>
+                    <input type="submit" value="Ajouter" class="btn btn-primary" />
+                </div>
+            </div>
+		</div>
+	</section>
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/mixitup.min.js"></script>
+	<script src="js/circle-progress.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/main.js"></script>
+    </body>
+</html>

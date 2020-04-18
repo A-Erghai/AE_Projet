@@ -1,0 +1,58 @@
+﻿@model IEnumerable<AE_Projet.Models.Professeur>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="AjtProf">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nom_Prof)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Prenom_Prof)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CIN_Prof)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email_Prof)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mdp)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nom_Prof)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Prenom_Prof)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CIN_Prof)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email_Prof)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mdp)
+            </td>
+            <td>
+                <a asp-action="MdfProf" asp-route-id="@item.Id_Prof">Edit</a> |
+                <a asp-action="SuppProf" asp-route-id="@item.Id_Prof">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

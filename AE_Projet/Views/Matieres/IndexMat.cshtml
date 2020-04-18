@@ -1,0 +1,40 @@
+﻿@model IEnumerable<AE_Projet.Models.Matiere>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="AjtMat">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nom_Matiere)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.professeur)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nom_Matiere)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.professeur.Id_Prof)
+            </td>
+            <td>
+                <a asp-action="MdfMat" asp-route-id="@item.Id_Matiere">Edit</a> |
+                <a asp-action="SuppMat" asp-route-id="@item.Id_Matiere">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

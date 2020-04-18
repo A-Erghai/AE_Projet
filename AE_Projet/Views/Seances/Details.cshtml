@@ -1,0 +1,48 @@
+﻿@model AE_Projet.Models.Seance
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Seance</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Heure_D)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Heure_D)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Heure_F)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Heure_F)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.filiere)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.filiere.Id_Filiere)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.salle)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.salle.Id_Salle)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.matiere)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.matiere.Id_Matiere)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id_Seance">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

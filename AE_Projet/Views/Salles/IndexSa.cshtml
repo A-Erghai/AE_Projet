@@ -1,0 +1,34 @@
+﻿@model IEnumerable<AE_Projet.Models.Salle>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="AjtSa">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nom_Salle)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nom_Salle)
+            </td>
+            <td>
+                <a asp-action="MdfSa" asp-route-id="@item.Id_Salle">Edit</a> |
+                <a asp-action="SuppSa" asp-route-id="@item.Id_Salle">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
