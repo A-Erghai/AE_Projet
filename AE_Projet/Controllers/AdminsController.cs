@@ -36,7 +36,7 @@ namespace AE_Projet.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AjouterAdmin(Admin admin)
+        public async Task<IActionResult> AjouterAdmin([Bind("Id_Admin,Nom_Admin,Prenom_Admin,CIN_Admin,Email_Admin,Mdp")] Admin admin)
         {
             if (ModelState.IsValid)
             {
@@ -68,7 +68,7 @@ namespace AE_Projet.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ModifierAdmin(int id, Admin admin)
+        public async Task<IActionResult> ModifierAdmin(int id, [Bind("Id_Admin,Nom_Admin,Prenom_Admin,CIN_Admin,Email_Admin,Mdp")] Admin admin)
         {
             if (id != admin.Id_Admin)
             {
@@ -149,7 +149,7 @@ namespace AE_Projet.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AjtF(Filiere filiere)
+        public async Task<IActionResult> AjtF([Bind("Id_Filiere,Nom_Filiere")] Filiere filiere)
         {
             if (ModelState.IsValid)
             {
@@ -181,7 +181,7 @@ namespace AE_Projet.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> MdfF(int id, Filiere filiere)
+        public async Task<IActionResult> MdfF(int id, [Bind("Id_Filiere,Nom_Filiere")] Filiere filiere)
         {
             if (id != filiere.Id_Filiere)
             {
@@ -256,7 +256,7 @@ namespace AE_Projet.Controllers
         // GET: Etudiants/Create
         public IActionResult AjouterEtd()
         {
-            ViewData["Nom_Filiere"] = new SelectList(_db.filieres, "Nom_Filiere", "Nom_Filiere");
+            ViewData["Nom_Filiere"] = new SelectList(_db.filieres, "Id_Filiere", "Nom_Filiere");
             return View();
         }
 
@@ -265,7 +265,7 @@ namespace AE_Projet.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AjouterEtd( Etudiant etudiant)
+        public async Task<IActionResult> AjouterEtd([Bind("Matricule,Nom_Etd,Prenom_Etd,CIN_Etd,Id_Filiere")] Etudiant etudiant)
         {
             if (ModelState.IsValid)
             {
@@ -273,7 +273,7 @@ namespace AE_Projet.Controllers
                 await _db.SaveChangesAsync();
                 return RedirectToAction("IndexEtd");
             }
-            ViewData["Nom_Filiere"] = new SelectList(_db.filieres, "Nom_Filiere", "Nom_Filiere", etudiant.Id_Filiere);
+            ViewData["Nom_Filiere"] = new SelectList(_db.filieres, "Id_Filiere", "Nom_Filiere", etudiant.Id_Filiere);
             return View(etudiant);
         }
 
@@ -290,7 +290,7 @@ namespace AE_Projet.Controllers
             {
                 return NotFound();
             }
-            ViewData["Nom_Filiere"] = new SelectList(_db.filieres, "Nom_Filiere", "Nom_Filiere", etudiant.Id_Filiere);
+            ViewData["Nom_Filiere"] = new SelectList(_db.filieres, "Id_Filiere", "Nom_Filiere", etudiant.Id_Filiere);
             return View(etudiant);
         }
 
@@ -299,7 +299,7 @@ namespace AE_Projet.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ModifierEtd(string id, Etudiant etudiant)
+        public async Task<IActionResult> ModifierEtd(string id, [Bind("Matricule,Nom_Etd,Prenom_Etd,CIN_Etd,Id_Filiere")] Etudiant etudiant)
         {
             if (id != etudiant.Matricule)
             {
@@ -326,7 +326,7 @@ namespace AE_Projet.Controllers
                 }
                 return RedirectToAction("IndexEtd");
             }
-            ViewData["Nom_Filiere"] = new SelectList(_db.filieres, "Nom_Filiere", "Nom_Filiere", etudiant.Id_Filiere);
+            ViewData["Nom_Filiere"] = new SelectList(_db.filieres, "Id_Filiere", "Nom_Filiere", etudiant.Id_Filiere);
             return View(etudiant);
         }
 
@@ -364,5 +364,660 @@ namespace AE_Projet.Controllers
         {
             return _db.etudiants.Any(e => e.Matricule == id);
         }
+
+        // GET: Professeurs
+        public async Task<IActionResult> IndexProf()
+        {
+            return View(await _db.professeurs.ToListAsync());
+        }
+
+
+        // GET: Professeurs/Create
+        public IActionResult AjtProf()
+        {
+            return View();
+        }
+
+        // POST: Professeurs/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AjtProf([Bind("Id_Prof,Nom_Prof,Prenom_Prof,CIN_Prof,Email_Prof,Mdp")] Professeur professeur)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Add(professeur);
+                await _db.SaveChangesAsync();
+                return RedirectToAction("IndexProf");
+            }
+            return View(professeur);
+        }
+
+        // GET: Professeurs/Edit/5
+        public async Task<IActionResult> MdfProf(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var professeur = await _db.professeurs.FindAsync(id);
+            if (professeur == null)
+            {
+                return NotFound();
+            }
+            return View(professeur);
+        }
+
+        // POST: Professeurs/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> MdfProf(int id, [Bind("Id_Prof,Nom_Prof,Prenom_Prof,CIN_Prof,Email_Prof,Mdp")] Professeur professeur)
+        {
+            if (id != professeur.Id_Prof)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _db.Update(professeur);
+                    await _db.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ProfesseurExists(professeur.Id_Prof))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction("IndexProf");
+            }
+            return View(professeur);
+        }
+
+        // GET: Professeurs/Delete/5
+        public async Task<IActionResult> SuppProf(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var professeur = await _db.professeurs
+                .FirstOrDefaultAsync(m => m.Id_Prof == id);
+            if (professeur == null)
+            {
+                return NotFound();
+            }
+
+            return View(professeur);
+        }
+
+        // POST: Professeurs/Delete/5
+        [HttpPost, ActionName("SuppProf")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SuppProfConfirmed(int id)
+        {
+            var professeur = await _db.professeurs.FindAsync(id);
+            _db.professeurs.Remove(professeur);
+            await _db.SaveChangesAsync();
+            return RedirectToAction("IndexProf");
+        }
+
+        private bool ProfesseurExists(int id)
+        {
+            return _db.professeurs.Any(e => e.Id_Prof == id);
+        }
+
+        // GET: Matieres
+        public async Task<IActionResult> IndexMat()
+        {
+            var applicationDbContext = _db.matieres.Include(m => m.professeur);
+            return View(await applicationDbContext.ToListAsync());
+        }
+
+        // GET: Matieres/Details/5
+        /*  public async Task<IActionResult> Details(int? id)
+          {
+              if (id == null)
+              {
+                  return NotFound();
+              }
+
+              var matiere = await _db.matieres
+                  .Include(m => m.professeur)
+                  .FirstOrDefaultAsync(m => m.Id_Matiere == id);
+              if (matiere == null)
+              {
+                  return NotFound();
+              }
+
+              return View(matiere);
+          }*/
+
+        // GET: Matieres/Create
+        public IActionResult AjtMat()
+        {
+            ViewData["Nom_Prof"] = new SelectList(_db.professeurs, "Id_Prof", "Nom_Prof");
+            return View();
+        }
+
+        // POST: Matieres/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AjtMat([Bind("Id_Matiere,Nom_Matiere,Id_Prof")] Matiere matiere)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Add(matiere);
+                await _db.SaveChangesAsync();
+                return RedirectToAction("IndexMat");
+            }
+            ViewData["Nom_Prof"] = new SelectList(_db.professeurs, "Id_Prof", "Nom_Prof", matiere.Id_Prof);
+            return View(matiere);
+        }
+
+        // GET: Matieres/Edit/5
+        public async Task<IActionResult> MdfMAt(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var matiere = await _db.matieres.FindAsync(id);
+            if (matiere == null)
+            {
+                return NotFound();
+            }
+            ViewData["Nom_Prof"] = new SelectList(_db.professeurs, "Id_Prof", "Nom_Prof", matiere.Id_Prof);
+            return View(matiere);
+        }
+
+        // POST: Matieres/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> MdfMAt(int id, [Bind("Id_Matiere,Nom_Matiere,Id_Prof")] Matiere matiere)
+        {
+            if (id != matiere.Id_Matiere)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _db.Update(matiere);
+                    await _db.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!MatiereExists(matiere.Id_Matiere))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction("IndexMat");
+            }
+            ViewData["Nom_Prof"] = new SelectList(_db.professeurs, "Id_Prof", "Nom_Prof", matiere.Id_Prof);
+            return View(matiere);
+        }
+
+        // GET: Matieres/Delete/5
+        public async Task<IActionResult> SuppMat(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var matiere = await _db.matieres
+                .Include(m => m.professeur)
+                .FirstOrDefaultAsync(m => m.Id_Matiere == id);
+            if (matiere == null)
+            {
+                return NotFound();
+            }
+
+            return View(matiere);
+        }
+
+        // POST: Matieres/Delete/5
+        [HttpPost, ActionName("SuppMat")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SuppMatConfirmed(int id)
+        {
+            var matiere = await _db.matieres.FindAsync(id);
+            _db.matieres.Remove(matiere);
+            await _db.SaveChangesAsync();
+            return RedirectToAction("IndexMat");
+        }
+
+        private bool MatiereExists(int id)
+        {
+            return _db.matieres.Any(e => e.Id_Matiere == id);
+        }
+        // GET: Salles
+        public async Task<IActionResult> IndexSa()
+        {
+            return View(await _db.salles.ToListAsync());
+        }
+
+
+
+        // GET: Salles/Create
+        public IActionResult AjtSa()
+        {
+            return View();
+        }
+
+        // POST: Salles/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AjtSa([Bind("Id_Salle,Nom_Salle")] Salle salle)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Add(salle);
+                await _db.SaveChangesAsync();
+                return RedirectToAction("IndexSa");
+            }
+            return View(salle);
+        }
+
+        // GET: Salles/Edit/5
+        public async Task<IActionResult> MdfSa(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var salle = await _db.salles.FindAsync(id);
+            if (salle == null)
+            {
+                return NotFound();
+            }
+            return View(salle);
+        }
+
+        // POST: Salles/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> MdfSa(int id, [Bind("Id_Salle,Nom_Salle")]  Salle salle)
+        {
+            if (id != salle.Id_Salle)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _db.Update(salle);
+                    await _db.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!SalleExists(salle.Id_Salle))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction("IndexSa");
+            }
+            return View(salle);
+        }
+
+        // GET: Salles/Delete/5
+        public async Task<IActionResult> SuppSa(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var salle = await _db.salles
+                .FirstOrDefaultAsync(m => m.Id_Salle == id);
+            if (salle == null)
+            {
+                return NotFound();
+            }
+
+            return View(salle);
+        }
+
+        // POST: Salles/Delete/5
+        [HttpPost, ActionName("SuppSa")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SuppSaConfirmed(int id)
+        {
+            var salle = await _db.salles.FindAsync(id);
+            _db.salles.Remove(salle);
+            await _db.SaveChangesAsync();
+            return RedirectToAction("IndexSa");
+        }
+
+        private bool SalleExists(int id)
+        {
+            return _db.salles.Any(e => e.Id_Salle == id);
+        }
+
+        // GET: Presences
+        public async Task<IActionResult> IndexPre()
+        {
+            var applicationDbContext = _db.presences.Include(p => p.salle);
+            return View(await applicationDbContext.ToListAsync());
+        }
+
+        // GET: Presences/Details/5
+        /*  public async Task<IActionResult> Details(int? id)
+          {
+              if (id == null)
+              {
+                  return NotFound();
+              }
+
+              var presence = await _db.presences
+                  .Include(p => p.salle)
+                  .FirstOrDefaultAsync(m => m.Id_Presence == id);
+              if (presence == null)
+              {
+                  return NotFound();
+              }
+
+              return View(presence);
+          }*/
+
+        // GET: Presences/Create
+        public IActionResult AjtPre()
+        {
+            ViewData["Nom_Salle"] = new SelectList(_db.salles, "Id_Salle", "Nom_Salle");
+            return View();
+        }
+
+        // POST: Presences/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AjtPre([Bind("Id_Presence,Matricule,Date,Id_Salle")] Presence presence)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Add(presence);
+                await _db.SaveChangesAsync();
+                return RedirectToAction("IndexPre");
+            }
+            ViewData["Nom_Salle"] = new SelectList(_db.salles, "Id_Salle", "Nom_Salle", presence.Id_Salle);
+            return View(presence);
+        }
+
+        // GET: Presences/Edit/5
+        public async Task<IActionResult> MdfPre(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var presence = await _db.presences.FindAsync(id);
+            if (presence == null)
+            {
+                return NotFound();
+            }
+            ViewData["Nom_Salle"] = new SelectList(_db.salles, "Id_Salle", "Nom_Salle", presence.Id_Salle);
+            return View(presence);
+        }
+
+        // POST: Presences/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> MdfPre(int id, [Bind("Id_Presence,Matricule,Date,Id_Salle")] Presence presence)
+        {
+            if (id != presence.Id_Presence)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _db.Update(presence);
+                    await _db.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!PresenceExists(presence.Id_Presence))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction("IndexPre");
+            }
+            ViewData["Nom_Salle"] = new SelectList(_db.salles, "Id_Salle", "Nom_Salle", presence.Id_Salle);
+            return View(presence);
+        }
+
+        // GET: Presences/Delete/5
+        public async Task<IActionResult> SuppPre(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var presence = await _db.presences
+                .Include(p => p.salle)
+                .FirstOrDefaultAsync(m => m.Id_Presence == id);
+            if (presence == null)
+            {
+                return NotFound();
+            }
+
+            return View(presence);
+        }
+
+        // POST: Presences/Delete/5
+        [HttpPost, ActionName("SuppPre")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SuppPreConfirmed(int id)
+        {
+            var presence = await _db.presences.FindAsync(id);
+            _db.presences.Remove(presence);
+            await _db.SaveChangesAsync();
+            return RedirectToAction("IndexPre");
+        }
+
+        private bool PresenceExists(int id)
+        {
+            return _db.presences.Any(e => e.Id_Presence == id);
+        }
+
+        // GET: Seances
+        public async Task<IActionResult> IndexSea()
+        {
+            var applicationDbContext = _db.seances.Include(s => s.filiere).Include(s => s.matiere).Include(s => s.salle);
+            return View(await applicationDbContext.ToListAsync());
+        }
+
+        // GET: Seances/Details/5
+        /*  public async Task<IActionResult> Details(int? id)
+          {
+              if (id == null)
+              {
+                  return NotFound();
+              }
+
+              var seance = await _db.seances
+                  .Include(s => s.filiere)
+                  .Include(s => s.matiere)
+                  .Include(s => s.salle)
+                  .FirstOrDefaultAsync(m => m.Id_Seance == id);
+              if (seance == null)
+              {
+                  return NotFound();
+              }
+
+              return View(seance);
+          }*/
+
+        // GET: Seances/Create
+        public IActionResult AjtSea()
+        {
+            ViewData["Nom_Filiere"] = new SelectList(_db.filieres, "Id_Filiere", "Nom_Filiere");
+            ViewData["Nom_Matiere"] = new SelectList(_db.matieres, "Id_Matiere", "Nom_Matiere");
+            ViewData["Nom_Salle"] = new SelectList(_db.salles, "Id_Salle", "Nom_Salle");
+            return View();
+        }
+
+        // POST: Seances/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AjtSea([Bind("Id_Seance,Id_Filiere,Id_Salle,Heure_D,Heure_F,Id_Matiere")] Seance seance)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Add(seance);
+                await _db.SaveChangesAsync();
+                return RedirectToAction("IndexSea");
+            }
+            ViewData["Nom_Filiere"] = new SelectList(_db.filieres, "Id_Filiere", "Nom_Filiere", seance.Id_Filiere);
+            ViewData["Nom_Matiere"] = new SelectList(_db.matieres, "Id_Matiere", "Nom_Matiere", seance.Id_Matiere);
+            ViewData["Nom_Salle"] = new SelectList(_db.salles, "Id_Salle", "Nom_Salle", seance.Id_Salle);
+            return View(seance);
+        }
+
+        // GET: Seances/Edit/5
+        public async Task<IActionResult> MdfSea(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var seance = await _db.seances.FindAsync(id);
+            if (seance == null)
+            {
+                return NotFound();
+            }
+            ViewData["Nom_Filiere"] = new SelectList(_db.filieres, "Id_Filiere", "Nom_Filiere", seance.Id_Filiere);
+            ViewData["Nom_Matiere"] = new SelectList(_db.matieres, "Id_Matiere", "Nom_Matiere", seance.Id_Matiere);
+            ViewData["Nom_Salle"] = new SelectList(_db.salles, "Id_Salle", "Nom_Salle", seance.Id_Salle);
+            return View(seance);
+        }
+
+        // POST: Seances/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> MdfSea(int id, [Bind("Id_Seance,Id_Filiere,Id_Salle,Heure_D,Heure_F,Id_Matiere")] Seance seance)
+        {
+            if (id != seance.Id_Seance)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _db.Update(seance);
+                    await _db.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!SeanceExists(seance.Id_Seance))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction("IndexSea");
+            }
+            ViewData["Nom_Filiere"] = new SelectList(_db.filieres, "Id_Filiere", "Nom_Filiere", seance.Id_Filiere);
+            ViewData["Nom_Matiere"] = new SelectList(_db.matieres, "Id_Matiere", "Nom_Matiere", seance.Id_Matiere);
+            ViewData["Nom_Salle"] = new SelectList(_db.salles, "Id_Salle", "Nom_Salle", seance.Id_Salle);
+            return View(seance);
+        }
+
+        // GET: Seances/Delete/5
+        public async Task<IActionResult> SuppSea(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var seance = await _db.seances
+                .Include(s => s.filiere)
+                .Include(s => s.matiere)
+                .Include(s => s.salle)
+                .FirstOrDefaultAsync(m => m.Id_Seance == id);
+            if (seance == null)
+            {
+                return NotFound();
+            }
+
+            return View(seance);
+        }
+
+        // POST: Seances/Delete/5
+        [HttpPost, ActionName("SuppSea")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SuppSeaConfirmed(int id)
+        {
+            var seance = await _db.seances.FindAsync(id);
+            _db.seances.Remove(seance);
+            await _db.SaveChangesAsync();
+            return RedirectToAction("IndexSea");
+        }
+
+        private bool SeanceExists(int id)
+        {
+            return _db.seances.Any(e => e.Id_Seance == id);
+        }
     }
+
 }

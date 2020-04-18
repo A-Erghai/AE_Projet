@@ -1,0 +1,47 @@
+﻿@model AE_Projet.Models.Seance
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Seance</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AjtSea">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Id_Filiere" class="control-label"></label>
+                <select asp-for="Id_Filiere" class ="form-control" asp-items="ViewBag.Nom_Filiere"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Id_Salle" class="control-label"></label>
+                <select asp-for="Id_Salle" class ="form-control" asp-items="ViewBag.Nom_Salle"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Heure_D" class="control-label"></label>
+                <input asp-for="Heure_D" class="form-control" />
+                <span asp-validation-for="Heure_D" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Heure_F" class="control-label"></label>
+                <input asp-for="Heure_F" class="form-control" />
+                <span asp-validation-for="Heure_F" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Id_Matiere" class="control-label"></label>
+                <select asp-for="Id_Matiere" class ="form-control" asp-items="ViewBag.Nom_Matiere"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="IndexSea">Back to List</a>
+</div>
+

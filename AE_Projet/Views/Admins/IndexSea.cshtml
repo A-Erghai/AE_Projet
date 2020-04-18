@@ -1,0 +1,58 @@
+﻿@model IEnumerable<AE_Projet.Models.Seance>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="AjtSea">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Heure_D)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Heure_F)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.filiere)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.salle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.matiere)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Heure_D)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Heure_F)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.filiere.Nom_Filiere)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.salle.Nom_Salle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.matiere.Nom_Matiere)
+            </td>
+            <td>
+                <a asp-action="MdfSea" asp-route-id="@item.Id_Seance">Edit</a> |
+                <a asp-action="SuppSea" asp-route-id="@item.Id_Seance">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="Views\Seances\Create.cshtml" />
+    <None Include="Views\Seances\Delete.cshtml" />
+    <None Include="Views\Seances\Details.cshtml" />
+    <None Include="Views\Seances\Edit.cshtml" />
+    <None Include="Views\Seances\Index.cshtml" />
     <None Include="wwwroot\Content\css\bootstrap.min.css" />
     <None Include="wwwroot\Content\css\font-awesome.min.css" />
     <None Include="wwwroot\Content\css\owl.carousel.css" />
