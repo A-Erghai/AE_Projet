@@ -2,7 +2,7 @@
 @model IEnumerable<AE_Projet.Models.Etudiant>
 
 @{
-    Layout = "_LayoutAdmin";
+    Layout = "_LayoutProf";
 }
 <section class="categories-section spad">
     <div class="container">
@@ -41,7 +41,7 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.filiere.Nom_Filiere)
                             </td>
-                            <td><a href="Etudiant-prc-prf.html" class="btn btn-outline-dark btn-block" role="button">Presence</a></td>
+                            <td><a href="" class="btn btn-outline-dark btn-block" role="button">Presence</a></td>
                         </tr>
                     }
                 </tbody>

@@ -18,12 +18,13 @@ namespace AE_Projet.Controllers
         {
             _db = db;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null)
+            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
             {
                 return View("Login");
             }
+            
             return View();
         }
         public IActionResult Login()
@@ -59,9 +60,9 @@ namespace AE_Projet.Controllers
         }
 
         // GET: Admins
-        public async Task<IActionResult> IndexAdmin()
+        public async Task<IActionResult> IndexAdmin(Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null)
+            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
             {
                 return View("Login");
             }
@@ -70,11 +71,11 @@ namespace AE_Projet.Controllers
             
         }
 
-        
+        [HttpGet]
         // GET: Admins/Create
-        public IActionResult AjouterAdmin()
+        public IActionResult AjouterAdmin(int id,Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null)
+            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
             {
                 return View("Login");
             }
@@ -98,9 +99,9 @@ namespace AE_Projet.Controllers
         }
 
         // GET: Admins/Edit/5
-        public async Task<IActionResult> ModifierAdmin(int? id)
+        public async Task<IActionResult> ModifierAdmin(int? id,Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null)
+            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
             {
                 return View("Login");
             }
@@ -154,9 +155,9 @@ namespace AE_Projet.Controllers
         }
 
         // GET: Admins/Delete/5
-        public async Task<IActionResult> SuppAdmin(int? id)
+        public async Task<IActionResult> SuppAdmin(int? id,Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null)
+            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
             {
                 return View("Login");
             }
@@ -191,9 +192,9 @@ namespace AE_Projet.Controllers
             return _db.admins.Any(e => e.Id_Admin == id);
         }
         // GET: Filieres
-        public async Task<IActionResult> IndexF()
+        public async Task<IActionResult> IndexF(Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null)
+            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
             {
                 return View("Login");
             }
@@ -202,9 +203,9 @@ namespace AE_Projet.Controllers
 
 
         // GET: Filieres/Create
-        public IActionResult AjtF()
+        public IActionResult AjtF(Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null)
+            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
             {
                 return View("Login");
             }
@@ -228,9 +229,9 @@ namespace AE_Projet.Controllers
         }
 
         // GET: Filieres/Edit/5
-        public async Task<IActionResult> MdfF(int? id)
+        public async Task<IActionResult> MdfF(int? id,Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null)
+            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
             {
                 return View("Login");
             }
@@ -283,9 +284,9 @@ namespace AE_Projet.Controllers
         }
 
         // GET: Filieres/Delete/5
-        public async Task<IActionResult> SuppF(int? id)
+        public async Task<IActionResult> SuppF(int? id,Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null)
+            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
             {
                 return View("Login");
             }
@@ -320,9 +321,9 @@ namespace AE_Projet.Controllers
             return _db.filieres.Any(e => e.Id_Filiere == id);
         }
         // GET: Etudiants
-        public async Task<IActionResult> IndexEtd()
+        public async Task<IActionResult> IndexEtd(Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null)
+            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
             {
                 return View("Login");
             }
@@ -333,9 +334,9 @@ namespace AE_Projet.Controllers
 
 
         // GET: Etudiants/Create
-        public IActionResult AjouterEtd()
+        public IActionResult AjouterEtd(Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null)
+            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
             {
                 return View("Login");
             }
@@ -361,9 +362,9 @@ namespace AE_Projet.Controllers
         }
 
         // GET: Etudiants/Edit/5
-        public async Task<IActionResult> ModifierEtd(string id)
+        public async Task<IActionResult> ModifierEtd(string id,Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null)
+            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
             {
                 return View("Login");
             }
@@ -418,9 +419,9 @@ namespace AE_Projet.Controllers
         }
 
         // GET: Etudiants/Delete/5
-        public async Task<IActionResult> SuppEtd(string id)
+        public async Task<IActionResult> SuppEtd(string id,Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null)
+            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
             {
                 return View("Login");
             }
@@ -457,9 +458,9 @@ namespace AE_Projet.Controllers
         }
 
         // GET: Professeurs
-        public async Task<IActionResult> IndexProf()
+        public async Task<IActionResult> IndexProf(Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null)
+            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
             {
                 return View("Login");
             }
@@ -468,9 +469,9 @@ namespace AE_Projet.Controllers
 
 
         // GET: Professeurs/Create
-        public IActionResult AjtProf()
+        public IActionResult AjtProf(Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null)
+            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
             {
                 return View("Login");
             }
@@ -494,9 +495,9 @@ namespace AE_Projet.Controllers
         }
 
         // GET: Professeurs/Edit/5
-        public async Task<IActionResult> MdfProf(int? id)
+        public async Task<IActionResult> MdfProf(int? id, Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null)
+            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
             {
                 return View("Login");
             }
@@ -549,9 +550,9 @@ namespace AE_Projet.Controllers
         }
 
         // GET: Professeurs/Delete/5
-        public async Task<IActionResult> SuppProf(int? id)
+        public async Task<IActionResult> SuppProf(int? id,Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null)
+            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
             {
                 return View("Login");
             }
@@ -587,9 +588,9 @@ namespace AE_Projet.Controllers
         }
 
         // GET: Matieres
-        public async Task<IActionResult> IndexMat()
+        public async Task<IActionResult> IndexMat(Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null)
+            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
             {
                 return View("Login");
             }
@@ -617,9 +618,9 @@ namespace AE_Projet.Controllers
           }*/
 
         // GET: Matieres/Create
-        public IActionResult AjtMat()
+        public IActionResult AjtMat(Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null)
+            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
             {
                 return View("Login");
             }
@@ -645,9 +646,9 @@ namespace AE_Projet.Controllers
         }
 
         // GET: Matieres/Edit/5
-        public async Task<IActionResult> MdfMat(int? id)
+        public async Task<IActionResult> MdfMat(int? id,Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null)
+            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
             {
                 return View("Login");
             }
@@ -702,9 +703,9 @@ namespace AE_Projet.Controllers
         }
 
         // GET: Matieres/Delete/5
-        public async Task<IActionResult> SuppMat(int? id)
+        public async Task<IActionResult> SuppMat(int? id,Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null)
+            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
             {
                 return View("Login");
             }
@@ -740,9 +741,9 @@ namespace AE_Projet.Controllers
             return _db.matieres.Any(e => e.Id_Matiere == id);
         }
         // GET: Salles
-        public async Task<IActionResult> IndexSa()
+        public async Task<IActionResult> IndexSa(Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null)
+            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
             {
                 return View("Login");
             }
@@ -752,9 +753,9 @@ namespace AE_Projet.Controllers
 
 
         // GET: Salles/Create
-        public IActionResult AjtSa()
+        public IActionResult AjtSa(Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null)
+            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
             {
                 return View("Login");
             }
@@ -778,9 +779,9 @@ namespace AE_Projet.Controllers
         }
 
         // GET: Salles/Edit/5
-        public async Task<IActionResult> MdfSa(int? id)
+        public async Task<IActionResult> MdfSa(int? id,Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null)
+            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
             {
                 return View("Login");
             }
@@ -833,9 +834,9 @@ namespace AE_Projet.Controllers
         }
 
         // GET: Salles/Delete/5
-        public async Task<IActionResult> SuppSa(int? id)
+        public async Task<IActionResult> SuppSa(int? id,Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null)
+            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
             {
                 return View("Login");
             }
@@ -871,9 +872,9 @@ namespace AE_Projet.Controllers
         }
 
         // GET: Presences
-        public async Task<IActionResult> IndexPre()
+        public async Task<IActionResult> IndexPre(Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null)
+            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
             {
                 return View("Login");
             }
@@ -901,9 +902,9 @@ namespace AE_Projet.Controllers
           }*/
 
         // GET: Presences/Create
-        public IActionResult AjtPre()
+        public IActionResult AjtPre(Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null)
+            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
             {
                 return View("Login");
             }
@@ -931,9 +932,9 @@ namespace AE_Projet.Controllers
         }
 
         // GET: Presences/Edit/5
-        public async Task<IActionResult> MdfPre(int? id)
+        public async Task<IActionResult> MdfPre(int? id,Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null)
+            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
             {
                 return View("Login");
             }
@@ -990,9 +991,9 @@ namespace AE_Projet.Controllers
         }
 
         // GET: Presences/Delete/5
-        public async Task<IActionResult> SuppPre(int? id)
+        public async Task<IActionResult> SuppPre(int? id,Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null)
+            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
             {
                 return View("Login");
             }
@@ -1029,9 +1030,9 @@ namespace AE_Projet.Controllers
         }
 
         // GET: Seances
-        public async Task<IActionResult> IndexSea()
+        public async Task<IActionResult> IndexSea(Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null)
+            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
             {
                 return View("Login");
             }
@@ -1061,9 +1062,9 @@ namespace AE_Projet.Controllers
           }*/
 
         // GET: Seances/Create
-        public IActionResult AjtSea()
+        public IActionResult AjtSea(Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null)
+            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
             {
                 return View("Login");
             }
@@ -1093,9 +1094,9 @@ namespace AE_Projet.Controllers
         }
 
         // GET: Seances/Edit/5
-        public async Task<IActionResult> MdfSea(int? id)
+        public async Task<IActionResult> MdfSea(int? id,Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null)
+            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
             {
                 return View("Login");
             }
@@ -1154,9 +1155,9 @@ namespace AE_Projet.Controllers
         }
 
         // GET: Seances/Delete/5
-        public async Task<IActionResult> SuppSea(int? id)
+        public async Task<IActionResult> SuppSea(int? id,Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null)
+            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
             {
                 return View("Login");
             }

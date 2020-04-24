@@ -16,7 +16,7 @@
             </div>
         </div>
     </section>*@
-<section class="categories-section spad set-bg" data-setbg="~/Content/img/bg.jpg" style="height: 100%" >
+@*<section class="categories-section spad set-bg" data-setbg="~/Content/img/bg.jpg" style="height: 100%" >
     <div class="container">
         <div class="section-title">
             <h2>Se connecter</h2>
@@ -39,4 +39,18 @@
             </div>
         </form>
     </div>
-</section>
+</section>*@
+    <section class="hero-section set-bg" data-setbg="img/bg.jpg" style="height: 100%">
+
+        <div class="container">
+            <div class="hero-text text-white row">
+                <div class="col-lg-10 offset-lg-1">
+                    <form asp-action="login" class="intro-newslatter">
+                        <input asp-for="Email_Admin" type="text" class="form-control" placeholder="E-mail">
+                        <input asp-for="Mdp" class="form-control last-s" placeholder="Mot de Passe">
+                        <button class="site-btn">Se connecter</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>

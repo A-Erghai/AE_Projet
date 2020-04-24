@@ -22,9 +22,9 @@ namespace AE_Projet.Controllers
         }
 
         // GET: Professeurs
-        public async Task<IActionResult> IndexProf(string email)
+        public async Task<IActionResult> IndexProf(string email,Professeur p)
         {
-            if (HttpContext.Session.GetString("username") == null)
+            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != p.Email_Prof)
             {
                 return View("Login");
             }
@@ -33,11 +33,15 @@ namespace AE_Projet.Controllers
             return View(professeur);
         }
 
-        public IActionResult Index()
-        {
+        //public IActionResult Index()
+        //{
+        //    if (HttpContext.Session.GetString("username") == null)
+        //    {
+        //        return View("Login");
+        //    }
 
-            return View();
-        }
+        //    return View();
+        //}
         public IActionResult Login()
         {
 
@@ -194,27 +198,39 @@ namespace AE_Projet.Controllers
         {
             return _db.professeurs.Any(e => e.Id_Prof == id);
         }
-        public async Task<IActionResult> IndexMat(string email)
+        public async Task<IActionResult> IndexMat(string email,Professeur p)
         {
-            if (HttpContext.Session.GetString("username") == null)
+            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != p.Email_Prof)
             {
                 return View("Login");
             }
             var matiere = await _db.matieres.Include(m => m.professeur).Where(x => x.professeur.Email_Prof == email).ToListAsync();
             return View(matiere);
         }
-        public async Task<IActionResult> IndexSea(int id)
+        public async Task<IActionResult> IndexSea(int id,Professeur p)
         {
+            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != p.Email_Prof)
+            {
+                return View("Login");
+            }
             var seance = await _db.seances.Include(s => s.filiere).Include(s => s.matiere).Include(s => s.salle).Where(x => x.Id_Matiere == id).ToListAsync();
             return View( seance);
         }
-        public async Task<IActionResult> IndexEtd(int id)
+        public async Task<IActionResult> IndexEtd(int id,Professeur p)
         {
+            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != p.Email_Prof)
+            {
+                return View("Login");
+            }
             var etudiant = await _db.etudiants.Include(e => e.filiere).Where(x => x.Id_Filiere == id).ToListAsync();
             return View( etudiant);
         }
-        public async Task<IActionResult> IndexPre(int id)
+        public async Task<IActionResult> IndexPre(int id,Professeur p)
         {
+            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != p.Email_Prof)
+            {
+                return View("Login");
+            }
             var presence = await _db.presences.Include(p => p.salle).Where(x => x.Id_Salle == id).ToListAsync();
             return View( presence);
         }
