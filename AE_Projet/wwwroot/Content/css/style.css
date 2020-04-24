@@ -104,7 +104,9 @@ ul,ol {
 	font-weight: 500;
 }
 
+
 .set-bg {
+	background-image: url('~/Content/img/categories/2.jpg');
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: top center;

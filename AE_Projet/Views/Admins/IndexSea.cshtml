@@ -1,58 +1,55 @@
 ﻿@model IEnumerable<AE_Projet.Models.Seance>
 
+
 @{
-    ViewData["Title"] = "Index";
+    Layout = "_LayoutAdmin";
 }
-
-<h1>Index</h1>
-
-<p>
-    <a asp-action="AjtSea">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Heure_D)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Heure_F)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.filiere)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.salle)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.matiere)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Heure_D)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Heure_F)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.filiere.Nom_Filiere)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.salle.Nom_Salle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.matiere.Nom_Matiere)
-            </td>
-            <td>
-                <a asp-action="MdfSea" asp-route-id="@item.Id_Seance">Edit</a> |
-                <a asp-action="SuppSea" asp-route-id="@item.Id_Seance">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<section class="categories-section spad">
+    <div class="container">
+        <div class="section-title">
+            <h2>Gestion Seance</h2>
+            <a asp-action="AjtSea" class="dex-btn " style="background-color: #0039e6;color: white;">Ajouter Seance</a>
+        </div>
+        <div>
+            <table class="table table-bordered" style="margin-top: -60px;">
+                <thead>
+                    <tr>
+                        <th>Filiere</th>
+                        <th>Salle</th>
+                        <th>Heure Debut</th>
+                        <th>Heure Fin</th>
+                        <th>Matiere</th>
+                        <th>Presence</th>
+                        <th>Modifier</th>
+                        <th>Supprimer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Heure_D)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Heure_F)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.filiere.Nom_Filiere)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.salle.Nom_Salle)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.matiere.Nom_Matiere)
+                            </td>
+                            <td><a href="Seance-prc.html" class="btn btn-outline-info btn-block" role="button">Presence</a></td>
+                            <td><a asp-action="MdfSea" asp-route-id="@item.Id_Seance" class="btn btn-outline-warning btn-block" role="button">Modifier</a></td>
+                            <td><a asp-action="SuppSea" asp-route-id="@item.Id_Seance" class="btn btn-outline-danger btn-block" role="button">Supprimer</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

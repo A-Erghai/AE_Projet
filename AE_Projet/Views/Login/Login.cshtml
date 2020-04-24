@@ -1,0 +1,18 @@
+﻿@model AE_Projet.Models.Admin
+@{
+    Layout = null;
+}
+
+    <section class="hero-section set-bg" data-setbg="img/bg.jpg" style="height: 100%">
+        <div class="container">
+            <div class="hero-text text-white row">
+                <div class="col-lg-10 offset-lg-1">
+                    <form class="intro-newslatter" method="post" asp-action="login">
+                        <input asp-for="Email_Admin" type="text" class="form-control" placeholder="E-mail" />
+                        <input asp-for="Mdp" type="text" class="last-s" placeholder="Mot de Passe" />
+                        <input type="submit" class="site-btn"  value="Se connecter">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>

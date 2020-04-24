@@ -112,18 +112,20 @@ namespace AE_Projet.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Date")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime?>("Date")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("Id_Salle")
                         .HasColumnType("int");
 
                     b.Property<string>("Matricule")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id_Presence");
 
                     b.HasIndex("Id_Salle");
+
+                    b.HasIndex("Matricule");
 
                     b.ToTable("presences");
                 });
@@ -424,6 +426,10 @@ namespace AE_Projet.Migrations
                         .HasForeignKey("Id_Salle")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("AE_Projet.Models.Etudiant", "etudiant")
+                        .WithMany()
+                        .HasForeignKey("Matricule");
                 });
 
             modelBuilder.Entity("AE_Projet.Models.Seance", b =>

@@ -1,0 +1,50 @@
+﻿@model AE_Projet.Models.Admin
+
+@{
+    Layout = "_LayoutAdmin";
+}
+
+<section class="categories-section spad">
+    <div class="container">
+        <div class="section-title">
+            <h2>Ajouter Administrateur</h2>
+        </div>
+        <form asp-action="AjouterAdmin">
+            <div class="formulaire">
+                <div class="form-group">
+                    <label asp-for="Nom_Admin" class="control-label"> Nom </label>
+                    <input asp-for="Nom_Admin" class="form-control" />
+                    <span asp-validation-for="Nom_Admin" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Prenom_Admin" class="control-label">Prenom</label>
+                    <input asp-for="Prenom_Admin" class="form-control" />
+                    <span asp-validation-for="Prenom_Admin" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CIN_Admin" class="control-label">CIN</label>
+                    <input asp-for="CIN_Admin" class="form-control" />
+                    <span asp-validation-for="CIN_Admin" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email_Admin" class="control-label">E-mail</label>
+                    <input asp-for="Email_Admin" class="form-control" />
+                    <span asp-validation-for="Email_Admin" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Mdp" class="control-label">Mot de passe</label>
+                    <input asp-for="Mdp" class="form-control" />
+                    <span asp-validation-for="Mdp" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <a asp-action="IndexAdin" class="btn btn-danger">Annuler</a>
+                    <input type="submit" value="Ajouter" class="btn btn-primary" />
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+@*@section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }*@

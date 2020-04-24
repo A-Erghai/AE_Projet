@@ -1,40 +1,44 @@
 ﻿@model IEnumerable<AE_Projet.Models.Matiere>
 
 @{
-    ViewData["Title"] = "Index";
+    Layout = "_LayoutAdmin";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="AjtMat">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nom_Matiere)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.professeur)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nom_Matiere)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.professeur.Nom_Prof)
-            </td>
-            <td>
-                <a asp-action="MdfMat" asp-route-id="@item.Id_Matiere">Edit</a> |
-                <a asp-action="SuppMat" asp-route-id="@item.Id_Matiere">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<section class="categories-section spad">
+    <div class="container">
+        <div class="section-title">
+            <h2>Gestion Matiere</h2>
+            <a asp-action="AjtMat" class="dex-btn " style="background-color: #0039e6;color: white;">Ajouter Matiere</a>
+        </div>
+        <div>
+            <table class="table table-bordered" style="margin-top: -60px;width: 70%; margin-left: 15%;">
+                <thead>
+                    <tr>
+                        <th> Matiere </th>
+                        <th>Professeur</th>
+                        <th>Modifier</th>
+                        <th>Supprimer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nom_Matiere)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.professeur.Nom_Prof)
+                            </td>
+                            <td>
+                                <a class="btn btn-outline-warning btn-block"  asp-action="MdfMat" asp-route-id="@item.Id_Matiere">Modifier</a> </td>
+                            <td>
+                                <a class="btn btn-outline-danger btn-block"  asp-action="SuppMat" asp-route-id="@item.Id_Matiere">Supprimer</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

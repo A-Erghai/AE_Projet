@@ -1,0 +1,37 @@
+﻿@model IEnumerable<AE_Projet.Models.Matiere>
+
+@{
+    Layout = "_LayoutAdmin";
+}
+
+    <section class="categories-section spad">
+        <div class="container">
+            <div class="section-title">
+                <h2>Gestion Matiere</h2>
+            </div>
+            <div>
+                <table class="table table-bordered" style="margin-top: -60px;">
+                    <thead>
+                        <tr>
+                            <th>Matiere</th>
+                            <th>Voir Seances</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                            @foreach (var item in Model)
+                            {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nom_Matiere)
+                            </td>
+                            <td><a asp-action="IndexSea" asp-route-id="@item.Id_Matiere" class="btn btn-outline-success btn-lg " role="button">Voir Seances</a></td>
+                           
+                        </tr>
+
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>

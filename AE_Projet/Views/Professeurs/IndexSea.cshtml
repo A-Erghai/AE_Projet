@@ -1,0 +1,53 @@
+﻿@model IEnumerable<AE_Projet.Models.Seance>
+
+
+@{
+    Layout = "_LayoutAdmin";
+}
+    <section class="categories-section spad">
+        <div class="container">
+            <div class="section-title">
+                <h2>Gestion Seance</h2>
+                <a href="Acceuil-prof.html" class="dex-btn " style="background-color: #2eb8b8;color: white; margin-left:-100%;"><i class="fas fa-angle-left"></i></a>
+            </div>
+            <div>
+                <table class="table table-bordered" style="margin-top: -60px;">
+                    <thead>
+                        <tr>
+                            <th>Filiere</th>
+                            <th>Salle</th>
+                            <th>Heure Debut</th>
+                            <th>Heure Fin</th>
+                            <th>Matiere</th>
+                            <th>Liste des Etudiants</th>
+                            <th>Presence</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.filiere.Nom_Filiere)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.salle.Nom_Salle)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Heure_D)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Heure_F)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.matiere.Nom_Matiere)
+                                </td>>
+                                <td><a asp-action="IndexETD" asp-route-id="@item.Id_Filiere"  class="btn btn-outline-primary btn-block" role="button">Liste des Etudiants</a></td>
+                                <td><a asp-action="IndexPre" asp-route-id="@item.Id_Salle" class="btn btn-outline-info btn-block" role="button">Presence</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>

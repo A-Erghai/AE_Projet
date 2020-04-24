@@ -1,34 +1,36 @@
 ﻿@model IEnumerable<AE_Projet.Models.Salle>
 
 @{
-    ViewData["Title"] = "Index";
+    Layout = "_LayoutAdmin";
 }
-
-<h1>Index</h1>
-
-<p>
-    <a asp-action="AjtSa">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nom_Salle)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nom_Salle)
-            </td>
-            <td>
-                <a asp-action="MdfSa" asp-route-id="@item.Id_Salle">Edit</a> |
-                <a asp-action="SuppSa" asp-route-id="@item.Id_Salle">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<section class="categories-section spad">
+    <div class="container">
+        <div class="section-title">
+            <h2>Gestion Salle</h2>
+            <a asp-action="AjtSa" class="dex-btn " style="background-color: #0039e6;color: white;">Ajouter Salle</a>
+        </div>
+        <div>
+            <table class="table table-bordered" style="margin-top: -60px;width: 70%; margin-left: 15%;">
+                <thead>
+                    <tr>
+                        <th style="width: 65%;">Nom</th>
+                        <th>Modifier</th>
+                        <th>Supprimer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nom_Salle)
+                            </td>
+                            <td><a asp-action="MdfSa" asp-route-id="@item.Id_Salle" class="btn btn-outline-warning btn-block" role="button">Modifier</a></td>
+                            <td><a asp-action="SuppSa" asp-route-id="@item.Id_Salle" class="btn btn-outline-danger btn-block" role="button">Supprimer</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

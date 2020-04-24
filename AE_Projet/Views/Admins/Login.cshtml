@@ -1,0 +1,42 @@
+﻿@model AE_Projet.Models.Admin
+@{
+    Layout = "_LayoutLoginA";
+}
+
+@*<section class="hero-section set-bg" data-setbg="~/Content/img/bg.jpg" style="height: 100%" >
+        <div class="container">
+            <div class="hero-text text-white row">
+                <div class="col-lg-10 offset-lg-1">
+                    <form class="intro-newslatter" method="post" asp-action="login">
+                        <input asp-for="Email_Admin" type="email" placeholder="E-mail">
+                        <input asp-for="Mdp" type="text" class="last-s" placeholder="Mot de Passe">
+                        <button class="site-btn">Se connecter</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>*@
+<section class="categories-section spad set-bg" data-setbg="~/Content/img/bg.jpg" style="height: 100%" >
+    <div class="container">
+        <div class="section-title">
+            <h2>Se connecter</h2>
+        </div>
+        <form asp-action="login">
+            <div class="formulaire">
+                <div class="form-group">
+                    <label asp-for="Email_Admin" class="control-label">E-mail</label>
+                    <input asp-for="Email_Admin" type="text" class="form-control" />
+                    <span asp-validation-for="Email_Admin" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Mdp" class="control-label">Mot de passe</label>
+                    <input asp-for="Mdp" class="form-control" />
+                    <span asp-validation-for="Mdp" class="text-danger"></span>
+                </div>
+                <div>
+                    <input type="submit" value="Se connecter" class="btn btn-primary" />
+                </div>
+            </div>
+        </form>
+    </div>
+</section>

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AE_Projet.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace AE_Projet.Controllers
 {
@@ -17,17 +18,66 @@ namespace AE_Projet.Controllers
         {
             _db = db;
         }
+        public async Task<IActionResult> Index()
+        {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                return View("Login");
+            }
+            return View();
+        }
+        public IActionResult Login()
+        {
+
+            return View();
+        }
+
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public IActionResult Login(Admin a)
+        {
+            Admin ad = _db.admins.Where(x => x.Email_Admin == a.Email_Admin && x.Mdp == a.Mdp).SingleOrDefault();
+            if (ad!= null)
+            {
+                HttpContext.Session.SetString("username", a.Email_Admin);
+                return View("Index");
+            }
+            else
+            {
+                ViewBag.error = "Invalid Account";
+                
+            }
+            return View();
+        }
+
+        // GET: Admins
+        [HttpGet]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Remove("username");
+            return RedirectToAction("Login");
+        }
 
         // GET: Admins
         public async Task<IActionResult> IndexAdmin()
         {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                return View("Login");
+            }
+            
             return View(await _db.admins.ToListAsync());
+            
         }
 
         
         // GET: Admins/Create
         public IActionResult AjouterAdmin()
         {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                return View("Login");
+            }
             return View();
         }
 
@@ -50,6 +100,11 @@ namespace AE_Projet.Controllers
         // GET: Admins/Edit/5
         public async Task<IActionResult> ModifierAdmin(int? id)
         {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                return View("Login");
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -101,6 +156,10 @@ namespace AE_Projet.Controllers
         // GET: Admins/Delete/5
         public async Task<IActionResult> SuppAdmin(int? id)
         {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                return View("Login");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -134,6 +193,10 @@ namespace AE_Projet.Controllers
         // GET: Filieres
         public async Task<IActionResult> IndexF()
         {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                return View("Login");
+            }
             return View(await _db.filieres.ToListAsync());
         }
 
@@ -141,6 +204,10 @@ namespace AE_Projet.Controllers
         // GET: Filieres/Create
         public IActionResult AjtF()
         {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                return View("Login");
+            }
             return View();
         }
 
@@ -163,6 +230,10 @@ namespace AE_Projet.Controllers
         // GET: Filieres/Edit/5
         public async Task<IActionResult> MdfF(int? id)
         {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                return View("Login");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -214,6 +285,10 @@ namespace AE_Projet.Controllers
         // GET: Filieres/Delete/5
         public async Task<IActionResult> SuppF(int? id)
         {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                return View("Login");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -247,6 +322,10 @@ namespace AE_Projet.Controllers
         // GET: Etudiants
         public async Task<IActionResult> IndexEtd()
         {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                return View("Login");
+            }
             var applicationDbContext = _db.etudiants.Include(e => e.filiere);
             return View(await applicationDbContext.ToListAsync());
         }
@@ -256,6 +335,10 @@ namespace AE_Projet.Controllers
         // GET: Etudiants/Create
         public IActionResult AjouterEtd()
         {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                return View("Login");
+            }
             ViewData["Nom_Filiere"] = new SelectList(_db.filieres, "Id_Filiere", "Nom_Filiere");
             return View();
         }
@@ -280,6 +363,10 @@ namespace AE_Projet.Controllers
         // GET: Etudiants/Edit/5
         public async Task<IActionResult> ModifierEtd(string id)
         {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                return View("Login");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -333,6 +420,10 @@ namespace AE_Projet.Controllers
         // GET: Etudiants/Delete/5
         public async Task<IActionResult> SuppEtd(string id)
         {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                return View("Login");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -368,6 +459,10 @@ namespace AE_Projet.Controllers
         // GET: Professeurs
         public async Task<IActionResult> IndexProf()
         {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                return View("Login");
+            }
             return View(await _db.professeurs.ToListAsync());
         }
 
@@ -375,6 +470,10 @@ namespace AE_Projet.Controllers
         // GET: Professeurs/Create
         public IActionResult AjtProf()
         {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                return View("Login");
+            }
             return View();
         }
 
@@ -397,6 +496,10 @@ namespace AE_Projet.Controllers
         // GET: Professeurs/Edit/5
         public async Task<IActionResult> MdfProf(int? id)
         {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                return View("Login");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -448,6 +551,10 @@ namespace AE_Projet.Controllers
         // GET: Professeurs/Delete/5
         public async Task<IActionResult> SuppProf(int? id)
         {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                return View("Login");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -482,6 +589,10 @@ namespace AE_Projet.Controllers
         // GET: Matieres
         public async Task<IActionResult> IndexMat()
         {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                return View("Login");
+            }
             var applicationDbContext = _db.matieres.Include(m => m.professeur);
             return View(await applicationDbContext.ToListAsync());
         }
@@ -508,6 +619,10 @@ namespace AE_Projet.Controllers
         // GET: Matieres/Create
         public IActionResult AjtMat()
         {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                return View("Login");
+            }
             ViewData["Nom_Prof"] = new SelectList(_db.professeurs, "Id_Prof", "Nom_Prof");
             return View();
         }
@@ -530,8 +645,12 @@ namespace AE_Projet.Controllers
         }
 
         // GET: Matieres/Edit/5
-        public async Task<IActionResult> MdfMAt(int? id)
+        public async Task<IActionResult> MdfMat(int? id)
         {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                return View("Login");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -551,7 +670,7 @@ namespace AE_Projet.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> MdfMAt(int id, [Bind("Id_Matiere,Nom_Matiere,Id_Prof")] Matiere matiere)
+        public async Task<IActionResult> MdfMat(int id, [Bind("Id_Matiere,Nom_Matiere,Id_Prof")] Matiere matiere)
         {
             if (id != matiere.Id_Matiere)
             {
@@ -585,6 +704,10 @@ namespace AE_Projet.Controllers
         // GET: Matieres/Delete/5
         public async Task<IActionResult> SuppMat(int? id)
         {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                return View("Login");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -619,6 +742,10 @@ namespace AE_Projet.Controllers
         // GET: Salles
         public async Task<IActionResult> IndexSa()
         {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                return View("Login");
+            }
             return View(await _db.salles.ToListAsync());
         }
 
@@ -627,6 +754,10 @@ namespace AE_Projet.Controllers
         // GET: Salles/Create
         public IActionResult AjtSa()
         {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                return View("Login");
+            }
             return View();
         }
 
@@ -649,6 +780,10 @@ namespace AE_Projet.Controllers
         // GET: Salles/Edit/5
         public async Task<IActionResult> MdfSa(int? id)
         {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                return View("Login");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -700,6 +835,10 @@ namespace AE_Projet.Controllers
         // GET: Salles/Delete/5
         public async Task<IActionResult> SuppSa(int? id)
         {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                return View("Login");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -734,7 +873,11 @@ namespace AE_Projet.Controllers
         // GET: Presences
         public async Task<IActionResult> IndexPre()
         {
-            var applicationDbContext = _db.presences.Include(p => p.salle);
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                return View("Login");
+            }
+            var applicationDbContext = _db.presences.Include(p => p.etudiant).Include(p => p.salle);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -760,6 +903,11 @@ namespace AE_Projet.Controllers
         // GET: Presences/Create
         public IActionResult AjtPre()
         {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                return View("Login");
+            }
+            ViewData["Matricule"] = new SelectList(_db.etudiants, "Matricule", "Nom_Etd");
             ViewData["Nom_Salle"] = new SelectList(_db.salles, "Id_Salle", "Nom_Salle");
             return View();
         }
@@ -777,6 +925,7 @@ namespace AE_Projet.Controllers
                 await _db.SaveChangesAsync();
                 return RedirectToAction("IndexPre");
             }
+            ViewData["Matricule"] = new SelectList(_db.etudiants, "Matricule", "Nom_Etd", presence.Matricule);
             ViewData["Nom_Salle"] = new SelectList(_db.salles, "Id_Salle", "Nom_Salle", presence.Id_Salle);
             return View(presence);
         }
@@ -784,6 +933,10 @@ namespace AE_Projet.Controllers
         // GET: Presences/Edit/5
         public async Task<IActionResult> MdfPre(int? id)
         {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                return View("Login");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -794,6 +947,7 @@ namespace AE_Projet.Controllers
             {
                 return NotFound();
             }
+            ViewData["Matricule"] = new SelectList(_db.etudiants, "Matricule", "Nom_Etd", presence.Matricule);
             ViewData["Nom_Salle"] = new SelectList(_db.salles, "Id_Salle", "Nom_Salle", presence.Id_Salle);
             return View(presence);
         }
@@ -830,6 +984,7 @@ namespace AE_Projet.Controllers
                 }
                 return RedirectToAction("IndexPre");
             }
+            ViewData["Matricule"] = new SelectList(_db.etudiants, "Matricule", "Nom_Etd", presence.Matricule);
             ViewData["Nom_Salle"] = new SelectList(_db.salles, "Id_Salle", "Nom_Salle", presence.Id_Salle);
             return View(presence);
         }
@@ -837,6 +992,10 @@ namespace AE_Projet.Controllers
         // GET: Presences/Delete/5
         public async Task<IActionResult> SuppPre(int? id)
         {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                return View("Login");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -872,6 +1031,10 @@ namespace AE_Projet.Controllers
         // GET: Seances
         public async Task<IActionResult> IndexSea()
         {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                return View("Login");
+            }
             var applicationDbContext = _db.seances.Include(s => s.filiere).Include(s => s.matiere).Include(s => s.salle);
             return View(await applicationDbContext.ToListAsync());
         }
@@ -900,6 +1063,10 @@ namespace AE_Projet.Controllers
         // GET: Seances/Create
         public IActionResult AjtSea()
         {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                return View("Login");
+            }
             ViewData["Nom_Filiere"] = new SelectList(_db.filieres, "Id_Filiere", "Nom_Filiere");
             ViewData["Nom_Matiere"] = new SelectList(_db.matieres, "Id_Matiere", "Nom_Matiere");
             ViewData["Nom_Salle"] = new SelectList(_db.salles, "Id_Salle", "Nom_Salle");
@@ -928,6 +1095,10 @@ namespace AE_Projet.Controllers
         // GET: Seances/Edit/5
         public async Task<IActionResult> MdfSea(int? id)
         {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                return View("Login");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -985,6 +1156,10 @@ namespace AE_Projet.Controllers
         // GET: Seances/Delete/5
         public async Task<IActionResult> SuppSea(int? id)
         {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                return View("Login");
+            }
             if (id == null)
             {
                 return NotFound();

@@ -1,52 +1,60 @@
 ﻿@model IEnumerable<AE_Projet.Models.Etudiant>
 
 @{
-    ViewData["Title"] = "Index";
+    Layout = "_LayoutAdmin";
 }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="AjouterEtd">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nom_Etd)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Prenom_Etd)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CIN_Etd)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.filiere)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nom_Etd)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Prenom_Etd)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CIN_Etd)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.filiere.Nom_Filiere)
-            </td>
-            <td>
-                <a asp-action="ModifierEtd" asp-route-id="@item.Matricule">Edit</a> |
-                <a asp-action="SuppEtd" asp-route-id="@item.Matricule">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<section class="categories-section spad">
+    <div class="container">
+        <div class="section-title">
+            <h2>Gestion Etudiant</h2>
+            <a asp-action="AjouterEtd" class="dex-btn " style="background-color: #0039e6;color: white;">Ajouter Etudiant</a>
+        </div>
+        <div>
+            <table class="table table-bordered" style="margin-top: -60px;">
+                <thead>
+                    <tr>
+                        <th>Matricule</th>
+                        <th>Nom</th>
+                        <th>Prenom</th>
+                        <th>CIN</th>
+                        <th>Filiere</th>
+                        <th>Presence</th>
+                        <th>Modifier</th>
+                        <th>Supprimer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Matricule)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nom_Etd)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Prenom_Etd)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CIN_Etd)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.filiere.Nom_Filiere)
+                        </td>
+                        
+                        <td><a href="Etudiant-prc.html" class="btn btn-outline-info btn-block" role="button">Presence</a></td>
+                        <td> <a class="btn btn-outline-warning btn-block" asp-action="ModifierEtd" asp-route-id="@item.Matricule">Modifier</a></td>
+                        <td> <a class="btn btn-outline-danger btn-block" asp-action="SuppEtd" asp-route-id="@item.Matricule">Supprimer</a></td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<div>
+    @Model.Count(i=>i.Matricule)
+</div>

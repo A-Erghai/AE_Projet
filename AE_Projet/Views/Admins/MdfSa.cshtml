@@ -1,31 +1,29 @@
 ﻿@model AE_Projet.Models.Salle
 
 @{
-    ViewData["Title"] = "Edit";
+    Layout = "_LayoutAdmin";
 }
 
-<h1>Edit</h1>
-
-<h4>Salle</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<section class="categories-section spad">
+    <div class="container">
+        <div class="section-title">
+            <h2>Modifier Salle</h2>
+        </div>
         <form asp-action="MdfSa">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id_Salle" />
-            <div class="form-group">
-                <label asp-for="Nom_Salle" class="control-label"></label>
-                <input asp-for="Nom_Salle" class="form-control" />
-                <span asp-validation-for="Nom_Salle" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Sauvgarde" class="btn btn-primary" />
+            <div class="formulaire">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id_Salle" />
+                <div class="form-group">
+                    <label asp-for="Nom_Salle" class="control-label">Nom Salle</label>
+                    <input asp-for="Nom_Salle" class="form-control" />
+                    <span asp-validation-for="Nom_Salle" class="text-danger"></span>
+                </div>
+                <div>
+                    <a asp-action="Index" class="btn btn-danger">Annuler</a>
+                    <input type="submit" value="Sauvgarde" class="btn btn-primary" />
+                </div>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+</section>
 

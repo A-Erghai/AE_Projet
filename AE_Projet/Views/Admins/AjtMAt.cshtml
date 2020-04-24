@@ -1,34 +1,32 @@
 ﻿@model AE_Projet.Models.Matiere
 
 @{
-    ViewData["Title"] = "Create";
+    Layout = "_LayoutAdmin";
 }
 
-<h1>Create</h1>
-
-<h4>Matiere</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<section class="categories-section spad">
+    <div class="container">
+        <div class="section-title">
+            <h2>Ajouter Matiere</h2>
+        </div>
         <form asp-action="AjtMat">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Nom_Matiere" class="control-label"></label>
-                <input asp-for="Nom_Matiere" class="form-control" />
-                <span asp-validation-for="Nom_Matiere" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Id_Prof" class="control-label"></label>
-                <select asp-for="Id_Prof" class ="form-control" asp-items="ViewBag.Nom_Prof"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Ajouter" class="btn btn-primary" />
+            <div class="formulaire">
+                <div class="form-group">
+                    <label asp-for="Nom_Matiere" class="control-label"></label>
+                    <input asp-for="Nom_Matiere" class="form-control" />
+                    <span asp-validation-for="Nom_Matiere" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Id_Prof" class="control-label"></label>
+                    <select asp-for="Id_Prof" class="form-control" asp-items="ViewBag.Nom_Prof"></select>
+                </div>
+                <div class="form-group">
+                    <a asp-action="IndexMat" class="btn btn-danger">Annuler</a>
+                    <input type="submit" value="Ajouter" class="btn btn-primary" />
+                </div>
+
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+</section>
 

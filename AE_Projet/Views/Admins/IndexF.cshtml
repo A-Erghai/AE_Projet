@@ -1,34 +1,41 @@
 ﻿@model IEnumerable<AE_Projet.Models.Filiere>
 
 @{
-    ViewData["Title"] = "Index";
+    Layout = "_LayoutAdmin";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="AjtF">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nom_Filiere)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nom_Filiere)
-            </td>
-            <td>
-                <a asp-action="MdfF" asp-route-id="@item.Id_Filiere">Edit</a> |
-                <a asp-action="SuppF" asp-route-id="@item.Id_Filiere">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<section class="categories-section spad">
+    <div class="container">
+        <div class="section-title">
+            <h2>Gestion Filiere</h2>
+            <a asp-action="AjtF" class="dex-btn " style="background-color: #0039e6;color: white;">Ajouter Filiere</a>
+        </div>
+        <div>
+            <table class="table table-bordered" style="margin-top: -60px;width: 70%; margin-left: 15%;">
+                <thead>
+                    <tr>
+                        <th style="width: 65%;">Nom</th>
+                        <th>Modifier</th>
+                        <th>Supprimer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nom_Filiere)
+                            </td>
+                            <td>
+                                <a class="btn btn-outline-warning btn-block" asp-action="MdfF" asp-route-id="@item.Id_Filiere">Modifier</a> 
+                            </td>
+                            <td>
+                                <a class="btn btn-outline-danger btn-block" asp-action="SuppF" asp-route-id="@item.Id_Filiere">Supprimer</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,48 @@
+﻿@model IEnumerable<AE_Projet.Models.Presence>
+
+@{
+    Layout = "_LayoutAdmin";
+}
+<section class="categories-section spad">
+    <div class="container">
+        <div class="section-title">
+            <h2>Liste de Presence</h2>
+            <a href="Seance-prof.html" class="dex-btn " style="background-color: #2eb8b8;color: white; margin-left:-100%;"><i class="fas fa-angle-left"></i></a>
+        </div>
+        <div style="text-align: center;margin-top: -50px;">
+            <div id="DG_T">Nombre d'Etudiants Present</div>
+            <div id="DD_T">Taux d'absentismes</div>
+        </div>
+        <div style="text-align: center;font-size: 50PX; margin-bottom: 20px;">
+            <div id="DG">39/90</div>
+            <div id="DD">30%</div>
+        </div>
+        <div>
+            <table class="table table-bordered" style="margin-top: -60px;">
+                <thead>
+                    <tr>
+                        <th> Matricule</th>
+                        <th>Nom </th>
+                        <th>Prenom </th>
+                        <th>Statut</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Matricule)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Matricule)
+                            </td>
+                            <td>Present(e)</td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

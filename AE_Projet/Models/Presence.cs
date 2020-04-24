@@ -13,12 +13,18 @@ namespace AE_Projet.Models
         public int Id_Presence { get; set; }
         public string Matricule { get; set; }
 
-        [DataType(DataType.Date)]
-        public string Date { get; set; }
+        [Display(Name ="Date")]
+        [DisplayFormat(ApplyFormatInEditMode =true, DataFormatString = "{0:dd/MM/yyyy HH:mm}")]
+        public DateTime? Date { get; set; }
 
         public int Id_Salle { get; set; }
 
+        [ForeignKey("Matricule")]
+        public Etudiant etudiant { get; set; }
+
         [ForeignKey("Id_Salle")]
         public Salle salle { get; set; }
+       
+
     }
 }

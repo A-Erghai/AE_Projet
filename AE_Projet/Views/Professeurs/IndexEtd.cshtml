@@ -1,0 +1,51 @@
+﻿
+@model IEnumerable<AE_Projet.Models.Etudiant>
+
+@{
+    Layout = "_LayoutAdmin";
+}
+<section class="categories-section spad">
+    <div class="container">
+        <div class="section-title">
+            <h2>Liste des Etudiants</h2>
+            <a href="Seance-prof.html" class="dex-btn " style="background-color: #2eb8b8;color: white; margin-left:-100%;"><i class="fas fa-angle-left"></i></a>
+        </div>
+        <div>
+            <table class="table table-bordered" style="margin-top: -60px;">
+                <thead>
+                    <tr>
+                        <th>Matricule</th>
+                        <th>Nom</th>
+                        <th>Prenom</th>
+                        <th>CIN</th>
+                        <th>Filiere</th>
+                        <th>Presence</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Matricule)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nom_Etd)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Prenom_Etd)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CIN_Etd)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.filiere.Nom_Filiere)
+                            </td>
+                            <td><a href="Etudiant-prc-prf.html" class="btn btn-outline-dark btn-block" role="button">Presence</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
