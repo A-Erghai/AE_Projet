@@ -22,11 +22,14 @@ namespace AE_Projet.Controllers
         }
 
         // GET: Professeurs
-        public async Task<IActionResult> IndexProf(int id)
+        public async Task<IActionResult> IndexProf(string email)
         {
-
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                return View("Login");
+            }
             
-            var professeur = await _db.professeurs.Where(x => x.Id_Prof == id).ToListAsync();
+            var professeur = await _db.professeurs.Where(x => x.Email_Prof == email).ToListAsync();
             return View(professeur);
         }
 
@@ -49,7 +52,7 @@ namespace AE_Projet.Controllers
             if (prof != null)
             {
                 HttpContext.Session.SetString("username", p.Email_Prof);
-                return View("Index");
+                return RedirectToAction("IndexMat","Professeurs",new { email = p.Email_Prof });
             }
             else
             {
@@ -191,13 +194,13 @@ namespace AE_Projet.Controllers
         {
             return _db.professeurs.Any(e => e.Id_Prof == id);
         }
-        public async Task<IActionResult> IndexMat(int id)
+        public async Task<IActionResult> IndexMat(string email)
         {
             if (HttpContext.Session.GetString("username") == null)
             {
                 return View("Login");
             }
-            var matiere = await _db.matieres.Include(m => m.professeur).Where(x => x.Id_Prof == id).ToListAsync();
+            var matiere = await _db.matieres.Include(m => m.professeur).Where(x => x.professeur.Email_Prof == email).ToListAsync();
             return View(matiere);
         }
         public async Task<IActionResult> IndexSea(int id)
