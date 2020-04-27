@@ -104,9 +104,13 @@ ul,ol {
 	font-weight: 500;
 }
 
-
+body {
+	background-image: url('~/Content/img/bg.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-color:black;
+}
 .set-bg {
-	background-image: url('~/Content/img/categories/2.jpg');
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: top center;
@@ -254,7 +258,9 @@ ul,ol {
 	left: 0;
 	padding-top: 20px;
 }
-
+.bg-logo {
+	display: inline-block;
+}
 .site-logo {
 	display: inline-block;
 }

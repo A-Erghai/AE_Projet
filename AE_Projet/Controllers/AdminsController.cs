@@ -62,7 +62,7 @@ namespace AE_Projet.Controllers
         // GET: Admins
         public async Task<IActionResult> IndexAdmin(Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
+            if (HttpContext.Session.GetString("username") == null /*|| HttpContext.Session.GetString("username") != a.Email_Admin*/)
             {
                 return View("Login");
             }
@@ -75,7 +75,7 @@ namespace AE_Projet.Controllers
         // GET: Admins/Create
         public IActionResult AjouterAdmin(int id,Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
+            if (HttpContext.Session.GetString("username") == null /*|| HttpContext.Session.GetString("username") != a.Email_Admin*/)
             {
                 return View("Login");
             }
@@ -83,8 +83,7 @@ namespace AE_Projet.Controllers
         }
 
         // POST: Admins/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AjouterAdmin([Bind("Id_Admin,Nom_Admin,Prenom_Admin,CIN_Admin,Email_Admin,Mdp")] Admin admin)
@@ -101,7 +100,7 @@ namespace AE_Projet.Controllers
         // GET: Admins/Edit/5
         public async Task<IActionResult> ModifierAdmin(int? id,Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
+            if (HttpContext.Session.GetString("username") == null /*|| HttpContext.Session.GetString("username") != a.Email_Admin*/)
             {
                 return View("Login");
             }
@@ -120,8 +119,7 @@ namespace AE_Projet.Controllers
         }
 
         // POST: Admins/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ModifierAdmin(int id, [Bind("Id_Admin,Nom_Admin,Prenom_Admin,CIN_Admin,Email_Admin,Mdp")] Admin admin)
@@ -157,7 +155,7 @@ namespace AE_Projet.Controllers
         // GET: Admins/Delete/5
         public async Task<IActionResult> SuppAdmin(int? id,Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
+            if (HttpContext.Session.GetString("username") == null /*|| HttpContext.Session.GetString("username") != a.Email_Admin*/)
             {
                 return View("Login");
             }
@@ -194,7 +192,7 @@ namespace AE_Projet.Controllers
         // GET: Filieres
         public async Task<IActionResult> IndexF(Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
+            if (HttpContext.Session.GetString("username") == null)
             {
                 return View("Login");
             }
@@ -205,7 +203,7 @@ namespace AE_Projet.Controllers
         // GET: Filieres/Create
         public IActionResult AjtF(Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
+            if (HttpContext.Session.GetString("username") == null /*|| HttpContext.Session.GetString("username") != a.Email_Admin*/)
             {
                 return View("Login");
             }
@@ -213,8 +211,7 @@ namespace AE_Projet.Controllers
         }
 
         // POST: Filieres/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AjtF([Bind("Id_Filiere,Nom_Filiere")] Filiere filiere)
@@ -231,7 +228,7 @@ namespace AE_Projet.Controllers
         // GET: Filieres/Edit/5
         public async Task<IActionResult> MdfF(int? id,Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
+            if (HttpContext.Session.GetString("username") == null /*|| HttpContext.Session.GetString("username") != a.Email_Admin*/)
             {
                 return View("Login");
             }
@@ -249,8 +246,7 @@ namespace AE_Projet.Controllers
         }
 
         // POST: Filieres/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> MdfF(int id, [Bind("Id_Filiere,Nom_Filiere")] Filiere filiere)
@@ -286,7 +282,7 @@ namespace AE_Projet.Controllers
         // GET: Filieres/Delete/5
         public async Task<IActionResult> SuppF(int? id,Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
+            if (HttpContext.Session.GetString("username") == null /*|| HttpContext.Session.GetString("username") != a.Email_Admin*/)
             {
                 return View("Login");
             }
@@ -323,7 +319,7 @@ namespace AE_Projet.Controllers
         // GET: Etudiants
         public async Task<IActionResult> IndexEtd(Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
+            if (HttpContext.Session.GetString("username") == null )
             {
                 return View("Login");
             }
@@ -336,7 +332,7 @@ namespace AE_Projet.Controllers
         // GET: Etudiants/Create
         public IActionResult AjouterEtd(Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
+            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") == a.Email_Admin)
             {
                 return View("Login");
             }
@@ -344,9 +340,7 @@ namespace AE_Projet.Controllers
             return View();
         }
 
-        // POST: Etudiants/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AjouterEtd([Bind("Matricule,Nom_Etd,Prenom_Etd,CIN_Etd,Id_Filiere")] Etudiant etudiant)
@@ -361,10 +355,10 @@ namespace AE_Projet.Controllers
             return View(etudiant);
         }
 
-        // GET: Etudiants/Edit/5
+        // GET:
         public async Task<IActionResult> ModifierEtd(string id,Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
+            if (HttpContext.Session.GetString("username") == null /*|| HttpContext.Session.GetString("username") != a.Email_Admin*/)
             {
                 return View("Login");
             }
@@ -382,9 +376,7 @@ namespace AE_Projet.Controllers
             return View(etudiant);
         }
 
-        // POST: Etudiants/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ModifierEtd(string id, [Bind("Matricule,Nom_Etd,Prenom_Etd,CIN_Etd,Id_Filiere")] Etudiant etudiant)
@@ -418,10 +410,10 @@ namespace AE_Projet.Controllers
             return View(etudiant);
         }
 
-        // GET: Etudiants/Delete/5
+        // GET:
         public async Task<IActionResult> SuppEtd(string id,Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
+            if (HttpContext.Session.GetString("username") == null /*|| HttpContext.Session.GetString("username") != a.Email_Admin*/)
             {
                 return View("Login");
             }
@@ -441,7 +433,7 @@ namespace AE_Projet.Controllers
             return View(etudiant);
         }
 
-        // POST: Etudiants/Delete/5
+        // POST: 
         [HttpPost, ActionName("SuppEtd")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SuppEtdConfirmed(string id)
@@ -457,10 +449,10 @@ namespace AE_Projet.Controllers
             return _db.etudiants.Any(e => e.Matricule == id);
         }
 
-        // GET: Professeurs
+        // GET:
         public async Task<IActionResult> IndexProf(Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
+            if (HttpContext.Session.GetString("username") == null /*|| HttpContext.Session.GetString("username") != a.Email_Admin*/)
             {
                 return View("Login");
             }
@@ -468,19 +460,17 @@ namespace AE_Projet.Controllers
         }
 
 
-        // GET: Professeurs/Create
+        // GET: 
         public IActionResult AjtProf(Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
+            if (HttpContext.Session.GetString("username") == null /*|| HttpContext.Session.GetString("username") != a.Email_Admin*/)
             {
                 return View("Login");
             }
             return View();
         }
 
-        // POST: Professeurs/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AjtProf([Bind("Id_Prof,Nom_Prof,Prenom_Prof,CIN_Prof,Email_Prof,Mdp")] Professeur professeur)
@@ -494,10 +484,10 @@ namespace AE_Projet.Controllers
             return View(professeur);
         }
 
-        // GET: Professeurs/Edit/5
+        // GET: 
         public async Task<IActionResult> MdfProf(int? id, Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
+            if (HttpContext.Session.GetString("username") == null /*|| HttpContext.Session.GetString("username") != a.Email_Admin*/)
             {
                 return View("Login");
             }
@@ -514,9 +504,7 @@ namespace AE_Projet.Controllers
             return View(professeur);
         }
 
-        // POST: Professeurs/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST:
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> MdfProf(int id, [Bind("Id_Prof,Nom_Prof,Prenom_Prof,CIN_Prof,Email_Prof,Mdp")] Professeur professeur)
@@ -549,10 +537,10 @@ namespace AE_Projet.Controllers
             return View(professeur);
         }
 
-        // GET: Professeurs/Delete/5
+        // GET: 
         public async Task<IActionResult> SuppProf(int? id,Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
+            if (HttpContext.Session.GetString("username") == null /*|| HttpContext.Session.GetString("username") != a.Email_Admin*/)
             {
                 return View("Login");
             }
@@ -571,7 +559,7 @@ namespace AE_Projet.Controllers
             return View(professeur);
         }
 
-        // POST: Professeurs/Delete/5
+        // POST: 
         [HttpPost, ActionName("SuppProf")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SuppProfConfirmed(int id)
@@ -587,10 +575,10 @@ namespace AE_Projet.Controllers
             return _db.professeurs.Any(e => e.Id_Prof == id);
         }
 
-        // GET: Matieres
+        // GET: 
         public async Task<IActionResult> IndexMat(Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
+            if (HttpContext.Session.GetString("username") == null /*|| HttpContext.Session.GetString("username") != a.Email_Admin*/)
             {
                 return View("Login");
             }
@@ -598,29 +586,11 @@ namespace AE_Projet.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Matieres/Details/5
-        /*  public async Task<IActionResult> Details(int? id)
-          {
-              if (id == null)
-              {
-                  return NotFound();
-              }
 
-              var matiere = await _db.matieres
-                  .Include(m => m.professeur)
-                  .FirstOrDefaultAsync(m => m.Id_Matiere == id);
-              if (matiere == null)
-              {
-                  return NotFound();
-              }
-
-              return View(matiere);
-          }*/
-
-        // GET: Matieres/Create
+        // GET:
         public IActionResult AjtMat(Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
+            if (HttpContext.Session.GetString("username") == null /*|| HttpContext.Session.GetString("username") != a.Email_Admin*/)
             {
                 return View("Login");
             }
@@ -628,9 +598,7 @@ namespace AE_Projet.Controllers
             return View();
         }
 
-        // POST: Matieres/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AjtMat([Bind("Id_Matiere,Nom_Matiere,Id_Prof")] Matiere matiere)
@@ -645,10 +613,10 @@ namespace AE_Projet.Controllers
             return View(matiere);
         }
 
-        // GET: Matieres/Edit/5
+        // GET: 
         public async Task<IActionResult> MdfMat(int? id,Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
+            if (HttpContext.Session.GetString("username") == null /*|| HttpContext.Session.GetString("username") != a.Email_Admin*/)
             {
                 return View("Login");
             }
@@ -666,9 +634,7 @@ namespace AE_Projet.Controllers
             return View(matiere);
         }
 
-        // POST: Matieres/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> MdfMat(int id, [Bind("Id_Matiere,Nom_Matiere,Id_Prof")] Matiere matiere)
@@ -702,10 +668,10 @@ namespace AE_Projet.Controllers
             return View(matiere);
         }
 
-        // GET: Matieres/Delete/5
+        // GET: 
         public async Task<IActionResult> SuppMat(int? id,Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
+            if (HttpContext.Session.GetString("username") == null /*|| HttpContext.Session.GetString("username") != a.Email_Admin*/)
             {
                 return View("Login");
             }
@@ -725,7 +691,7 @@ namespace AE_Projet.Controllers
             return View(matiere);
         }
 
-        // POST: Matieres/Delete/5
+        // POST: 
         [HttpPost, ActionName("SuppMat")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SuppMatConfirmed(int id)
@@ -740,10 +706,10 @@ namespace AE_Projet.Controllers
         {
             return _db.matieres.Any(e => e.Id_Matiere == id);
         }
-        // GET: Salles
+        // GET: 
         public async Task<IActionResult> IndexSa(Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
+            if (HttpContext.Session.GetString("username") == null /*|| HttpContext.Session.GetString("username") != a.Email_Admin*/)
             {
                 return View("Login");
             }
@@ -752,19 +718,17 @@ namespace AE_Projet.Controllers
 
 
 
-        // GET: Salles/Create
+        // GET: 
         public IActionResult AjtSa(Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
+            if (HttpContext.Session.GetString("username") == null /*|| HttpContext.Session.GetString("username") != a.Email_Admin*/)
             {
                 return View("Login");
             }
             return View();
         }
 
-        // POST: Salles/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST:
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AjtSa([Bind("Id_Salle,Nom_Salle")] Salle salle)
@@ -778,10 +742,10 @@ namespace AE_Projet.Controllers
             return View(salle);
         }
 
-        // GET: Salles/Edit/5
+        // GET: 
         public async Task<IActionResult> MdfSa(int? id,Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
+            if (HttpContext.Session.GetString("username") == null /*|| HttpContext.Session.GetString("username") != a.Email_Admin*/)
             {
                 return View("Login");
             }
@@ -798,9 +762,7 @@ namespace AE_Projet.Controllers
             return View(salle);
         }
 
-        // POST: Salles/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> MdfSa(int id, [Bind("Id_Salle,Nom_Salle")]  Salle salle)
@@ -833,10 +795,10 @@ namespace AE_Projet.Controllers
             return View(salle);
         }
 
-        // GET: Salles/Delete/5
+        // GET:
         public async Task<IActionResult> SuppSa(int? id,Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
+            if (HttpContext.Session.GetString("username") == null /*|| HttpContext.Session.GetString("username") != a.Email_Admin*/)
             {
                 return View("Login");
             }
@@ -855,7 +817,7 @@ namespace AE_Projet.Controllers
             return View(salle);
         }
 
-        // POST: Salles/Delete/5
+        // POST: 
         [HttpPost, ActionName("SuppSa")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SuppSaConfirmed(int id)
@@ -871,10 +833,10 @@ namespace AE_Projet.Controllers
             return _db.salles.Any(e => e.Id_Salle == id);
         }
 
-        // GET: Presences
+        // GET: 
         public async Task<IActionResult> IndexPre(Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
+            if (HttpContext.Session.GetString("username") == null /*/*|| HttpContext.Session.GetString("username") != a.Email_Admin*/)
             {
                 return View("Login");
             }
@@ -882,29 +844,12 @@ namespace AE_Projet.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Presences/Details/5
-        /*  public async Task<IActionResult> Details(int? id)
-          {
-              if (id == null)
-              {
-                  return NotFound();
-              }
+       
 
-              var presence = await _db.presences
-                  .Include(p => p.salle)
-                  .FirstOrDefaultAsync(m => m.Id_Presence == id);
-              if (presence == null)
-              {
-                  return NotFound();
-              }
-
-              return View(presence);
-          }*/
-
-        // GET: Presences/Create
+        // GET: 
         public IActionResult AjtPre(Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
+            if (HttpContext.Session.GetString("username") == null /*|| HttpContext.Session.GetString("username") != a.Email_Admin*/)
             {
                 return View("Login");
             }
@@ -913,15 +858,14 @@ namespace AE_Projet.Controllers
             return View();
         }
 
-        // POST: Presences/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AjtPre([Bind("Id_Presence,Matricule,Date,Id_Salle")] Presence presence)
         {
             if (ModelState.IsValid)
             {
+                presence.Date = DateTime.Now;
                 _db.Add(presence);
                 await _db.SaveChangesAsync();
                 return RedirectToAction("IndexPre");
@@ -931,10 +875,10 @@ namespace AE_Projet.Controllers
             return View(presence);
         }
 
-        // GET: Presences/Edit/5
+        // GET: 
         public async Task<IActionResult> MdfPre(int? id,Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
+            if (HttpContext.Session.GetString("username") == null /*|| HttpContext.Session.GetString("username") != a.Email_Admin*/)
             {
                 return View("Login");
             }
@@ -953,9 +897,7 @@ namespace AE_Projet.Controllers
             return View(presence);
         }
 
-        // POST: Presences/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST:
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> MdfPre(int id, [Bind("Id_Presence,Matricule,Date,Id_Salle")] Presence presence)
@@ -990,10 +932,10 @@ namespace AE_Projet.Controllers
             return View(presence);
         }
 
-        // GET: Presences/Delete/5
+        // GET: 
         public async Task<IActionResult> SuppPre(int? id,Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
+            if (HttpContext.Session.GetString("username") == null /*/*|| HttpContext.Session.GetString("username") != a.Email_Admin*/)
             {
                 return View("Login");
             }
@@ -1013,7 +955,7 @@ namespace AE_Projet.Controllers
             return View(presence);
         }
 
-        // POST: Presences/Delete/5
+        // POST: 
         [HttpPost, ActionName("SuppPre")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SuppPreConfirmed(int id)
@@ -1032,7 +974,7 @@ namespace AE_Projet.Controllers
         // GET: Seances
         public async Task<IActionResult> IndexSea(Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
+            if (HttpContext.Session.GetString("username") == null /*|| HttpContext.Session.GetString("username") != a.Email_Admin*/)
             {
                 return View("Login");
             }
@@ -1040,31 +982,11 @@ namespace AE_Projet.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Seances/Details/5
-        /*  public async Task<IActionResult> Details(int? id)
-          {
-              if (id == null)
-              {
-                  return NotFound();
-              }
-
-              var seance = await _db.seances
-                  .Include(s => s.filiere)
-                  .Include(s => s.matiere)
-                  .Include(s => s.salle)
-                  .FirstOrDefaultAsync(m => m.Id_Seance == id);
-              if (seance == null)
-              {
-                  return NotFound();
-              }
-
-              return View(seance);
-          }*/
-
-        // GET: Seances/Create
+        
+        // GET: 
         public IActionResult AjtSea(Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
+            if (HttpContext.Session.GetString("username") == null /*|| HttpContext.Session.GetString("username") != a.Email_Admin*/)
             {
                 return View("Login");
             }
@@ -1074,9 +996,7 @@ namespace AE_Projet.Controllers
             return View();
         }
 
-        // POST: Seances/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AjtSea([Bind("Id_Seance,Id_Filiere,Id_Salle,Heure_D,Heure_F,Id_Matiere")] Seance seance)
@@ -1093,10 +1013,10 @@ namespace AE_Projet.Controllers
             return View(seance);
         }
 
-        // GET: Seances/Edit/5
+        // GET: 
         public async Task<IActionResult> MdfSea(int? id,Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
+            if (HttpContext.Session.GetString("username") == null /*|| HttpContext.Session.GetString("username") != a.Email_Admin*/)
             {
                 return View("Login");
             }
@@ -1116,9 +1036,7 @@ namespace AE_Projet.Controllers
             return View(seance);
         }
 
-        // POST: Seances/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST:
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> MdfSea(int id, [Bind("Id_Seance,Id_Filiere,Id_Salle,Heure_D,Heure_F,Id_Matiere")] Seance seance)
@@ -1154,10 +1072,10 @@ namespace AE_Projet.Controllers
             return View(seance);
         }
 
-        // GET: Seances/Delete/5
+        // GET: 
         public async Task<IActionResult> SuppSea(int? id,Admin a)
         {
-            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != a.Email_Admin)
+            if (HttpContext.Session.GetString("username") == null /*|| HttpContext.Session.GetString("username") != a.Email_Admin*/)
             {
                 return View("Login");
             }
@@ -1179,7 +1097,7 @@ namespace AE_Projet.Controllers
             return View(seance);
         }
 
-        // POST: Seances/Delete/5
+        // POST: 
         [HttpPost, ActionName("SuppSea")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SuppSeaConfirmed(int id)
@@ -1193,6 +1111,57 @@ namespace AE_Projet.Controllers
         private bool SeanceExists(int id)
         {
             return _db.seances.Any(e => e.Id_Seance == id);
+        }
+        public ActionResult PreSea(int? id)
+        {
+            var nbrall = (from p in _db.presences join e in _db.etudiants on p.Matricule equals e.Matricule where e.Id_Filiere == id select p).Count();
+            var nbretd = (from e in _db.etudiants
+                          join f in _db.filieres on e.Id_Filiere equals f.Id_Filiere
+                          where e.Id_Filiere == id
+                          select e).Count();
+            var tauxAbsencer = (from etudiant in _db.etudiants
+                                join pres in _db.presences on etudiant.Matricule equals pres.Matricule
+                                where etudiant.Id_Filiere == id
+                                select new tauxAbsclasse
+                                {
+                                    nbr_pre = nbrall,
+                                    nbr_etd = nbretd,
+                                    Matricule = etudiant.Nom_Etd,
+                                    Taux = (nbrall * 100) / nbretd
+                                }
+             );
+            return View(tauxAbsencer.First());
+        }
+        [Route("Admins/EtdPre/{Matricule}")]
+        [HttpGet]
+        public ActionResult EtdPreA(string Matricule)
+        {
+
+
+            var nbrPreEtd = (from e in _db.etudiants
+                             join p in _db.presences on e.Matricule equals p.Matricule
+                             join s in _db.salles on p.Id_Salle equals s.Id_Salle
+                             where e.Matricule == Matricule
+                             select e).Count();
+
+            var nbrallSea = (from s in _db.seances join e in _db.etudiants on s.Id_Filiere equals e.Id_Filiere where e.Matricule == Matricule select s).Count();
+            var SeaPreEtd = (from p in _db.presences
+                             join e in _db.etudiants on p.Matricule equals e.Matricule
+                             where e.Matricule == Matricule
+                             select new nombreEtudiantAbsnce
+                             {
+                                 nomEtudiant = e.Nom_Etd,
+                                 prenomEtudiant = e.Prenom_Etd,
+                                 nombre = nbrallSea - nbrPreEtd,
+                                 nbrallSea = nbrallSea,
+                                 Taux = ((nbrallSea - nbrPreEtd) * 100) / nbrallSea
+                             }
+            );
+            if(SeaPreEtd == null)
+            {
+                return View();
+            }
+            return View(SeaPreEtd.First());
         }
     }
 

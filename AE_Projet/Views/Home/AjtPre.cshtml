@@ -1,0 +1,81 @@
+﻿@model AE_Projet.Models.Presence
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EMSI</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../Content/img/pic.png" rel="shortcut icon" />
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,500,500i,600,600i,700,700i,800,800i" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link rel="stylesheet" href="../Content/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../Content/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../Content/css/owl.carousel.css" />
+    <link rel="stylesheet" href="../Content/css/style.css" />
+    <style>
+        select {
+            margin-top: -50px;
+            margin-left: 25%;
+            
+        }
+
+        .last-s {
+            margin-left: 25%;
+        }
+
+        .site-btn {
+            margin-left: -40PX;
+        }
+    </style>
+</head>
+<body>
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+    <header class="header-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3">
+                    <div class="site-logo">
+                        <img src="../Content/img/logo.png" alt="">
+                    </div>
+
+                </div>
+                <div class="col-lg-9 col-md-9">
+                    <a asp-controller="Professeurs" asp-action="login" class="header-btn">Se Connecter</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="hero-section set-bg" data-setbg="../Content/img/bg.jpg" style="height: 100%">
+        <div class="container">
+            <div class="hero-text text-white row" >
+                <div class="col-lg-10 offset-lg-1">
+                    <form asp-action="AjtPre" class="intro-newslatter">
+                        
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <select asp-for="Id_Salle" asp-items="ViewBag.Nom_Salle"></select>
+                            </div>
+                       <br>
+                       <div class="form-group">
+                           <input asp-for="Matricule" type="text" class="last-s" placeholder="Matricule">
+                           <button class="site-btn">Valide</button>
+                       </div>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="../Content/js/jquery-3.2.1.min.js"></script>
+    <script src="../Content/js/bootstrap.min.js"></script>
+    <script src="../Content/js/mixitup.min.js"></script>
+    <script src="../Content/js/circle-progress.min.js"></script>
+    <script src="../Content/js/owl.carousel.min.js"></script>
+    <script src="../Content/js/main.js"></script>
+</body>
+</html>

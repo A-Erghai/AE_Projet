@@ -45,7 +45,7 @@
                             @Html.DisplayFor(modelItem => item.filiere.Nom_Filiere)
                         </td>
                         
-                        <td><a href="Etudiant-prc.html" class="btn btn-outline-info btn-block" role="button">Presence</a></td>
+                        <td><a asp-action="EtdPre"  asp-route-id="@item.Matricule" class="btn btn-outline-info btn-block" role="button">Presence</a></td>
                         <td> <a class="btn btn-outline-warning btn-block" asp-action="ModifierEtd" asp-route-id="@item.Matricule">Modifier</a></td>
                         <td> <a class="btn btn-outline-danger btn-block" asp-action="SuppEtd" asp-route-id="@item.Matricule">Supprimer</a></td>
                     </tr>

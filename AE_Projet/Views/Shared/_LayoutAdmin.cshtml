@@ -28,7 +28,7 @@
             margin-top: 5%;
         }
 
-        select {
+        .select {
             margin-bottom: 20px;
             width: 100%;
         }
@@ -38,6 +38,25 @@
 
         .site-btn {
             margin-left: -40PX;
+        }
+        #DG_T {
+            float: left;
+            width: 50%;
+        }
+
+        #DD_T {
+            margin-left: 200px;
+        }
+
+        #DG {
+            float: left;
+            width: 50%;
+            height: 100px;
+        }
+
+        #DD {
+            margin-left: 200px;
+            height: 100px;
         }
     </style>
 </head>
@@ -57,20 +76,16 @@
                 <div class="col-lg-9 col-md-9">
                     <nav class="main-menu">
                         <ul>
-                            <li><a asp-action="IndexAdmin">Accueil</a></li>
+                            @*<li><a asp-action="IndexAdmin">Accueil</a></li>*@
                             <li><a href="Profil-admin.html">  <i class="fas fa-user-circle"></i> @Context.Session.GetString("username")</a></li>
-                            <a asp-action="logout"class="dex-btn ">Se déconnecter</a>
+                            <a asp-action="logout" class="dex-btn ">Se déconnecter</a>
                         </ul>
                     </nav>
                 </div>
             </div>
         </div>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+    @RenderBody()
 
     <footer class="border-top footer text-muted">
         <div class="container">

@@ -3,62 +3,6 @@
 @{
     Layout = "_LayoutProf";
 }
-
-@* <section class="categories-section spad">
-
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Nom_Prof)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Prenom_Prof)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CIN_Prof)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Email_Prof)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Mdp)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nom_Prof)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Prenom_Prof)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CIN_Prof)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Email_Prof)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Mdp)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id_Prof">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id_Prof">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id_Prof">Delete</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-    </section>*@
 <section class="categories-section spad">
     <div class="container">
         < <div>

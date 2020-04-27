@@ -9,12 +9,16 @@ using AE_Projet.Models;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Specialized;
 using System.Threading;
+using Microsoft.Data.SqlClient;
+using SQLitePCL;
 
 namespace AE_Projet.Controllers
 {
     public class ProfesseursController : Controller
     {
         private readonly ApplicationDbContext _db;
+        public IEnumerable<Etudiant> etudiants { get; set; }
+        public IEnumerable<Seance> seances { get; set; }
 
         public ProfesseursController(ApplicationDbContext context)
         {
@@ -22,26 +26,8 @@ namespace AE_Projet.Controllers
         }
 
         // GET: Professeurs
-        public async Task<IActionResult> IndexProf(string email,Professeur p)
-        {
-            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != p.Email_Prof)
-            {
-                return View("Login");
-            }
-            
-            var professeur = await _db.professeurs.Where(x => x.Email_Prof == email).ToListAsync();
-            return View(professeur);
-        }
-
-        //public IActionResult Index()
-        //{
-        //    if (HttpContext.Session.GetString("username") == null)
-        //    {
-        //        return View("Login");
-        //    }
-
-        //    return View();
-        //}
+        
+        
         public IActionResult Login()
         {
 
@@ -65,142 +51,22 @@ namespace AE_Projet.Controllers
             }
             return View();
         }
-
-        // GET: Admins
         [HttpGet]
         public IActionResult Logout()
         {
             HttpContext.Session.Remove("username");
             return RedirectToAction("Login");
         }
-
-        // GET: Professeurs/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var professeur = await _db.professeurs
-                .FirstOrDefaultAsync(m => m.Id_Prof == id);
-            if (professeur == null)
-            {
-                return NotFound();
-            }
-
-            return View(professeur);
-        }
-
-        // GET: Professeurs/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Professeurs/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id_Prof,Nom_Prof,Prenom_Prof,CIN_Prof,Email_Prof,Mdp")] Professeur professeur)
-        {
-            if (ModelState.IsValid)
-            {
-                _db.Add(professeur);
-                await _db.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(professeur);
-        }
-
-        // GET: Professeurs/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var professeur = await _db.professeurs.FindAsync(id);
-            if (professeur == null)
-            {
-                return NotFound();
-            }
-            return View(professeur);
-        }
-
-        // POST: Professeurs/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id_Prof,Nom_Prof,Prenom_Prof,CIN_Prof,Email_Prof,Mdp")] Professeur professeur)
-        {
-            if (id != professeur.Id_Prof)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _db.Update(professeur);
-                    await _db.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ProfesseurExists(professeur.Id_Prof))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(professeur);
-        }
-
-        // GET: Professeurs/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var professeur = await _db.professeurs
-                .FirstOrDefaultAsync(m => m.Id_Prof == id);
-            if (professeur == null)
-            {
-                return NotFound();
-            }
-
-            return View(professeur);
-        }
-
-        // POST: Professeurs/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var professeur = await _db.professeurs.FindAsync(id);
-            _db.professeurs.Remove(professeur);
-            await _db.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
+        // GET: Admins
+        
         private bool ProfesseurExists(int id)
         {
             return _db.professeurs.Any(e => e.Id_Prof == id);
         }
-        public async Task<IActionResult> IndexMat(string email,Professeur p)
+        [Route("Professeurs")]
+        public async Task<IActionResult> IndexMat(string email, Professeur p)
         {
-            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != p.Email_Prof)
+            if (HttpContext.Session.GetString("username") == null /*|| HttpContext.Session.GetString("username") != p.Email_Prof*/)
             {
                 return View("Login");
             }
@@ -209,16 +75,16 @@ namespace AE_Projet.Controllers
         }
         public async Task<IActionResult> IndexSea(int id,Professeur p)
         {
-            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != p.Email_Prof)
+            if (HttpContext.Session.GetString("username") == null )
             {
                 return View("Login");
             }
             var seance = await _db.seances.Include(s => s.filiere).Include(s => s.matiere).Include(s => s.salle).Where(x => x.Id_Matiere == id).ToListAsync();
             return View( seance);
         }
-        public async Task<IActionResult> IndexEtd(int id,Professeur p)
+        public async Task<IActionResult> IndexEtd(int id)
         {
-            if (HttpContext.Session.GetString("username") == null || HttpContext.Session.GetString("username") != p.Email_Prof)
+            if (HttpContext.Session.GetString("username") == null /*|| HttpContext.Session.GetString("username") != p.Email_Prof*/)
             {
                 return View("Login");
             }
@@ -234,13 +100,53 @@ namespace AE_Projet.Controllers
             var presence = await _db.presences.Include(p => p.salle).Where(x => x.Id_Salle == id).ToListAsync();
             return View( presence);
         }
-        public async Task<IActionResult> IndexTauxV(int id)
+        
+        public ActionResult PreSea(int? id)
         {
-            var nbrPr = from p in _db.presences group p by p.Id_Presence into g select new { presences = g.Count() };
-            //var nbrEtd = from p in _db.etudiants group p by p.Matricule into g select new { Matr = g.Count() };
-            //var taux = nbrEtd / nbrEtd;
-            return View(nbrPr.ToListAsync());
+            var nbrall = (from p in _db.presences join e in _db.etudiants on p.Matricule equals e.Matricule where e.Id_Filiere == id select e).Count();
+            var nbretd = (from e in _db.etudiants
+                          join f in _db.filieres on e.Id_Filiere equals f.Id_Filiere
+                          where e.Id_Filiere == id
+                          select e).Count();
+            var tauxAbsencer = (from etudiant in _db.etudiants
+                                join pres in _db.presences on etudiant.Matricule equals pres.Matricule
+                                where etudiant.Id_Filiere == id
+                                select new tauxAbsclasse
+                                {
+                                    nbr_pre = nbrall-nbretd, 
+                                    nbr_etd = nbretd,
+                                    Matricule = etudiant.Nom_Etd,
+                                    Taux = (nbretd * 100) / nbrall - nbretd
+                                }
+             );
+            return View(tauxAbsencer.First());
         }
+        [Route("Professeurs/EtdPre/{Matricule}")]
+        [HttpGet]
+        public ActionResult EtdPre(string Matricule)
+        {
+            
+            
+            var nbrPreEtd = (from e in _db.etudiants
+                             join p in _db.presences on e.Matricule equals p.Matricule
+                             join s in _db.salles on p.Id_Salle equals s.Id_Salle
+                             where e.Matricule == Matricule
+                             select e).Count();
 
+            var nbrallSea = (from s in _db.seances join e in _db.etudiants on s.Id_Filiere equals e.Id_Filiere where e.Matricule == Matricule select s).Count();
+            var SeaPreEtd = (from p in _db.presences
+                             join e in _db.etudiants on p.Matricule equals e.Matricule
+                             where e.Matricule == Matricule
+                             select new nombreEtudiantAbsnce
+                             {
+                                 nomEtudiant = e.Nom_Etd,
+                                 prenomEtudiant = e.Prenom_Etd,
+                                 nombre = nbrallSea - nbrPreEtd,
+                                 nbrallSea = nbrallSea,
+                                 Taux = ((nbrallSea - nbrPreEtd) * 100) / nbrallSea
+                             }
+            );
+            return View(SeaPreEtd.First());
+        }
     }
 }

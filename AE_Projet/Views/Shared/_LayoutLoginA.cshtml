@@ -36,21 +36,14 @@
 
                 </div>
                 <div class="col-lg-9 col-md-9">
-                    <a href="indexx.html" class="header-btn">Accueil</a>
+                    <a asp-controller="Home" asp-action="AjtPre" class="header-btn" style="margin-left:5%">  Accueil</a>
+                    <a asp-controller="Professeurs" class="header-btn">  Professeur  </a>
                 </div>
             </div>
         </div>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - AE_Projet - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+    @RenderBody()
+
     <script src="~/Content/js/jquery-3.2.1.min.js"></script>
     <script src="~/Content/js/bootstrap.min.js"></script>
     <script src="~/Content/js/mixitup.min.js"></script>

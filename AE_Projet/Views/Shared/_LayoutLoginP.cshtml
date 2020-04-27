@@ -1,7 +1,4 @@
-﻿
-
-@using Microsoft.AspNetCore.Http;
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <title>EMSI</title>
@@ -15,42 +12,13 @@
     <link rel="stylesheet" href="~/Content/css/owl.carousel.css" />
     <link rel="stylesheet" href="~/Content/css/style.css" />
     <style>
-        body {
-            background-color: #f2f2f2;
-        }
-
         .formulaire {
             margin-top: -60px;
             width: 40%;
             margin-left: 30%;
         }
-
-        #categorie {
-            margin-top: 5%;
-        }
-
-        select {
-            margin-bottom: 20px;
-            width: 100%;
-        }
-        #DG_T {
-            float: left;
-            width: 50%;
-        }
-
-        #DD_T {
-            margin-left: 200px;
-        }
-
-        #DG {
-            float: left;
-            width: 50%;
-            height: 100px;
-        }
-
-        #DD {
-            margin-left: 200px;
-            height: 100px;
+        .site-btn {
+            margin-left: -40PX;
         }
     </style>
 </head>
@@ -68,24 +36,14 @@
 
                 </div>
                 <div class="col-lg-9 col-md-9">
-                    <nav class="main-menu">
-                        <ul>
-                            @*<li><a asp-action="IndexMat">Accueil</a></li>*@
-                            <li><a href="Profil-admin.html">  <i class="fas fa-user-circle"></i> @Context.Session.GetString("username")</a></li>
-                            <a asp-action="logout" class="dex-btn ">Se déconnecter</a>
-                        </ul>
-                    </nav>
+                    <a asp-controller="Home" asp-action="AjtPre" class="header-btn" style="margin-left:5%">  Accueil</a>
+                    <a asp-controller="Admins" class="header-btn">  Admin  </a>
                 </div>
             </div>
         </div>
     </header>
-  
     @RenderBody()
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - AE_Projet - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+
     <script src="~/Content/js/jquery-3.2.1.min.js"></script>
     <script src="~/Content/js/bootstrap.min.js"></script>
     <script src="~/Content/js/mixitup.min.js"></script>
@@ -93,4 +51,4 @@
     <script src="~/Content/js/owl.carousel.min.js"></script>
     <script src="~/Content/js/main.js"></script>
 </body>
-</html>
+</html>		
